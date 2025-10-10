@@ -7,6 +7,7 @@ import '../../domain/repositories/planet_repository.dart';
 import '../../domain/entities/celestial_body.dart';
 import '../widgets/cosmic_background.dart';
 import '../widgets/glass_card.dart';
+import 'planet_detail_screen.dart';
 
 class SolarSystemScreen extends StatelessWidget {
   const SolarSystemScreen({super.key});
@@ -87,7 +88,12 @@ class SolarSystemScreen extends StatelessWidget {
     return GlassCard(
       margin: const EdgeInsets.only(bottom: AppSpacing.marginMD),
       onTap: () {
-        // TODO: Navigate to planet detail
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PlanetDetailScreen(planet: planet),
+          ),
+        );
       },
       child: Row(
         children: [
