@@ -95,6 +95,10 @@ class SpaceExploration {
 
 /// Types of space exploration
 enum ExplorationType {
+  satellite, // Satellite missions
+  probe, // Space probes
+  rover, // Planetary rovers
+  telescope, // Space telescopes
   mannedMission, // Human spaceflight
   unmannedMission, // Robotic/probe missions
   satelliteLaunch, // Satellite deployments
