@@ -43,6 +43,7 @@ dependencies:
   sqflite: ^2.4.1
   shared_preferences: ^2.3.3
   path_provider: ^2.1.5
+  path: ^1.9.0
 
   # 3D models
   model_viewer_plus: ^1.8.0
@@ -67,6 +68,9 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+
+  # Testing
+  sqflite_common_ffi: ^2.3.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
