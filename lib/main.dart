@@ -9,7 +9,7 @@ import 'domain/repositories/planet_repository.dart';
 import 'domain/usecases/seed_solar_system.dart';
 import 'domain/usecases/seed_cosmic_phenomena.dart';
 import 'domain/usecases/seed_space_explorations.dart';
-import 'presentation/screens/home_screen.dart';
+import 'presentation/screens/main_navigation_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -67,7 +67,7 @@ class CosmoEduApp extends StatelessWidget {
         theme: AppTheme.darkTheme,
         themeMode: ThemeMode.dark,
         debugShowCheckedModeBanner: false,
-        home: const HomeScreen(),
+        home: const MainNavigationScreen(),
       ),
     );
   }
