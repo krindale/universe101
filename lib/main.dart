@@ -8,6 +8,7 @@ import 'data/repositories/planet_repository_impl.dart';
 import 'domain/repositories/planet_repository.dart';
 import 'domain/usecases/seed_solar_system.dart';
 import 'presentation/screens/home_screen.dart';
+import 'domain/usecases/seed_cosmic_phenomena.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,6 +28,12 @@ void main() async {
   final seedSolarSystem = SeedSolarSystem(planetRepository);
   if (!await seedSolarSystem.isSeeded()) {
     await seedSolarSystem.call();
+  }
+
+  // Seed cosmic phenomena data if not already seeded
+  final seedCosmicPhenomena = SeedCosmicPhenomena(databaseHelper);
+  if (!await seedCosmicPhenomena.isSeeded()) {
+    await seedCosmicPhenomena.call();
   }
 
   runApp(CosmoEduApp(

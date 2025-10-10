@@ -84,6 +84,10 @@ class CosmicPhenomenon {
 
 /// Types of cosmic phenomena
 enum PhenomenonType {
+  atmospheric, // Atmospheric phenomena (aurora, meteor showers)
+  stellar, // Star-related (supernova, nebula formation)
+  gravitational, // Gravitational phenomena (black holes, lensing)
+  orbital, // Orbital changes (comets, planetary motion)
   eclipse, // Solar or Lunar eclipse
   aurora, // Northern/Southern lights
   supernova, // Star explosion
