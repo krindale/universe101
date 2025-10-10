@@ -6,6 +6,7 @@ import 'core/theme/app_theme.dart';
 import 'data/datasources/database_helper.dart';
 import 'data/repositories/planet_repository_impl.dart';
 import 'domain/repositories/planet_repository.dart';
+import 'domain/usecases/seed_solar_system.dart';
 import 'presentation/screens/home_screen.dart';
 
 void main() async {
@@ -21,6 +22,12 @@ void main() async {
 
   // Initialize Repositories
   final planetRepository = PlanetRepositoryImpl(databaseHelper);
+
+  // Seed solar system data if not already seeded
+  final seedSolarSystem = SeedSolarSystem(planetRepository);
+  if (!await seedSolarSystem.isSeeded()) {
+    await seedSolarSystem.call();
+  }
 
   runApp(CosmoEduApp(
     planetRepository: planetRepository,
