@@ -1,0 +1,142 @@
+{
+  "master": {
+    "tasks": [
+      {
+        "id": 1,
+        "title": "Set up project dependencies and configuration",
+        "description": "Configure Flutter project with required dependencies for 3D models, Firebase integration, and local storage",
+        "details": "Add dependencies to pubspec.yaml: firebase_core, cloud_firestore, sqflite, shared_preferences, model_viewer_plus (for 3D models), cached_network_image. Update app configuration files and initialize Firebase. Clean up default Flutter template code and remove unused demo components.",
+        "testStrategy": "Verify all dependencies install correctly, Firebase connects without errors, and app builds successfully on Android/iOS/Web platforms",
+        "priority": "high",
+        "dependencies": [],
+        "status": "in-progress",
+        "subtasks": []
+      },
+      {
+        "id": 2,
+        "title": "Create data models and local database structure",
+        "description": "Implement comprehensive data models for planets, cosmic phenomena, and space exploration missions",
+        "details": "Extend existing CelestialBody and Planet models. Create models for CosmicPhenomenon (eclipses, auroras, supernovas, etc.), SpaceExploration (missions, spacecraft, timeline events), and UserProgress. Implement SQLite database schema with tables for storing educational content, user favorites, and progress tracking. Create data access layer with CRUD operations.",
+        "testStrategy": "Unit tests for all models, database migration tests, CRUD operation tests, data validation tests",
+        "priority": "high",
+        "dependencies": [
+          1
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 3,
+        "title": "Implement solar system content and data",
+        "description": "Create comprehensive solar system data including all planets, moons, and interesting episodes",
+        "details": "Populate database with detailed information for Sun and 8 planets including: physical characteristics (diameter, distance, atmosphere composition), interesting episodes (Mars canal controversy, Saturn ring formation), exploration history, and high-quality low-poly 3D model references. Include major moons for gas giants. Implement data seeding functionality.",
+        "testStrategy": "Data integrity tests, content validation tests, verify all planets have required fields and interesting episodes",
+        "priority": "medium",
+        "dependencies": [
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 4,
+        "title": "Create cosmic phenomena content system",
+        "description": "Implement content system for cosmic phenomena with historical context and storytelling",
+        "details": "Create content for eclipses (solar/lunar), auroras, supernovas, black holes, gravitational lensing, meteor showers, nebulae, star formation, and comet orbital changes. Include historical stories (ancient eclipse fears, 1919 Einstein relativity proof). Implement content categorization and filtering. Add visual aids and animation descriptions for each phenomenon.",
+        "testStrategy": "Content validation tests, historical accuracy verification, categorization and search functionality tests",
+        "priority": "medium",
+        "dependencies": [
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 5,
+        "title": "Develop space exploration timeline and mission database",
+        "description": "Create comprehensive space exploration history with missions, achievements, and timeline visualization",
+        "details": "Implement content for major missions: Apollo 11, Voyager 1/2, Curiosity, Perseverance, James Webb Space Telescope, Artemis project. Create timeline visualization component with chronological ordering. Include mission objectives, key achievements, real exploration footage/images, and current status. Implement mission detail views with rich multimedia content.",
+        "testStrategy": "Timeline accuracy tests, mission data validation, chronological ordering tests, multimedia content loading tests",
+        "priority": "medium",
+        "dependencies": [
+          2
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 6,
+        "title": "Implement navigation system and app structure",
+        "description": "Create orbital-style navigation and card-based information display system",
+        "details": "Enhance existing home screen with orbital navigation pattern. Implement bottom navigation or drawer with sections: Solar System, Cosmic Phenomena, Space Exploration, Favorites, Settings. Create card-based layouts for content display with smooth animations. Implement proper routing using named routes and navigation transitions that match the space theme.",
+        "testStrategy": "Navigation flow tests, UI responsiveness tests across devices, animation performance tests",
+        "priority": "medium",
+        "dependencies": [
+          1
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 7,
+        "title": "Build 3D planet viewer and interactive models",
+        "description": "Implement 3D planet models with rotation, zoom, and interactive features",
+        "details": "Integrate model_viewer_plus for 3D planet display. Create or source low-poly 3D models for all planets and major moons. Implement touch controls for rotation and zoom. Add information hotspots on 3D models that display facts when tapped. Ensure smooth 60fps performance and loading indicators for model assets.",
+        "testStrategy": "3D rendering performance tests, touch interaction tests, model loading tests, cross-platform compatibility tests",
+        "priority": "medium",
+        "dependencies": [
+          1,
+          3
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 8,
+        "title": "Implement learning cards and favorites system",
+        "description": "Create interactive learning cards with bookmarking and progress tracking",
+        "details": "Design and implement swipeable learning cards for quick facts and episodes. Create favorites/bookmarking system allowing users to save interesting content. Implement user progress tracking to show completion status. Add card categories and filtering options. Include sharing functionality for interesting facts.",
+        "testStrategy": "Card interaction tests, favorites persistence tests, progress tracking accuracy, sharing functionality tests",
+        "priority": "medium",
+        "dependencies": [
+          2,
+          6
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 9,
+        "title": "Develop dark theme and visual design system",
+        "description": "Enhance existing dark theme with cosmic color palette and animations",
+        "details": "Expand existing AppTheme with complete dark/light theme implementation matching PRD colors (dark navy #0A0F2C, purple #6C63FF, orange #FFB347). Add cosmic-inspired animations, starfield backgrounds, and smooth transitions. Implement theme switching functionality. Create consistent visual hierarchy with proper typography scaling.",
+        "testStrategy": "Theme consistency tests, animation performance tests, accessibility tests (contrast ratios), theme switching tests",
+        "priority": "medium",
+        "dependencies": [
+          6
+        ],
+        "status": "pending",
+        "subtasks": []
+      },
+      {
+        "id": 10,
+        "title": "Add notifications and settings functionality",
+        "description": "Implement notification system for space events and user settings management",
+        "details": "Create settings screen with theme toggle, notification preferences, content language selection. Implement local notifications for interesting space events (meteor showers, eclipses, mission updates). Add notification scheduling and management. Include user preferences for content difficulty level and favorite topics.",
+        "testStrategy": "Settings persistence tests, notification scheduling tests, permission handling tests, user preference validation",
+        "priority": "low",
+        "dependencies": [
+          6,
+          9
+        ],
+        "status": "pending",
+        "subtasks": []
+      }
+    ],
+    "metadata": {
+      "created": "2025-10-10T07:59:28.865Z",
+      "updated": "2025-10-10T08:14:12.680Z",
+      "description": "Tasks for master context"
+    }
+  }
+}
