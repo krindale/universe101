@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
-import 'home_screen.dart';
 import 'solar_system_screen.dart';
 import 'phenomena_screen.dart';
 import 'exploration_screen.dart';
-import 'favorites_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -18,11 +16,9 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = const [
-    HomeScreen(),
     SolarSystemScreen(),
     PhenomenaScreen(),
     ExplorationScreen(),
-    FavoritesScreen(),
   ];
 
   @override
@@ -58,28 +54,18 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
               children: [
                 _buildNavItem(
                   index: 0,
-                  icon: Icons.home,
-                  label: '홈',
-                ),
-                _buildNavItem(
-                  index: 1,
                   icon: Icons.public,
                   label: '태양계',
                 ),
                 _buildNavItem(
-                  index: 2,
+                  index: 1,
                   icon: Icons.auto_awesome,
                   label: '현상',
                 ),
                 _buildNavItem(
-                  index: 3,
+                  index: 2,
                   icon: Icons.rocket_launch,
                   label: '탐사',
-                ),
-                _buildNavItem(
-                  index: 4,
-                  icon: Icons.star,
-                  label: '즐겨찾기',
                 ),
               ],
             ),
