@@ -241,11 +241,91 @@ class AppTheme {
     );
   }
 
-  // ========== Light Theme (Optional, minimal support) ==========
+  // ========== Light Theme ==========
 
   static ThemeData get lightTheme {
-    // For future implementation if needed
-    // Currently app is dark mode only for cosmic aesthetic
-    return darkTheme;
+    return ThemeData(
+      useMaterial3: true,
+      brightness: Brightness.light,
+      colorScheme: const ColorScheme.light(
+        primary: AppColors.nebulaPurple,
+        secondary: AppColors.cosmicBlue,
+        tertiary: AppColors.solarOrange,
+        surface: Color(0xFFF5F5F5),
+        error: AppColors.supernovaRed,
+        onPrimary: Colors.white,
+        onSecondary: Colors.white,
+        onSurface: Color(0xFF1A1A1A),
+        onError: Colors.white,
+      ),
+      scaffoldBackgroundColor: const Color(0xFFF5F5F5),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        titleTextStyle: TextStyle(
+          color: Color(0xFF1A1A1A),
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+        ),
+        iconTheme: IconThemeData(
+          color: Color(0xFF1A1A1A),
+          size: AppSpacing.iconMD,
+        ),
+      ),
+      cardTheme: CardThemeData(
+        color: Colors.white,
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppSpacing.radiusLG),
+        ),
+        margin: const EdgeInsets.all(AppSpacing.marginMD),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.nebulaPurple,
+          foregroundColor: Colors.white,
+          elevation: 0,
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.paddingLG,
+            vertical: AppSpacing.paddingMD,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppSpacing.radiusMD),
+          ),
+          textStyle: AppTypography.labelLarge,
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor: AppColors.nebulaPurple,
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppSpacing.paddingMD,
+            vertical: AppSpacing.paddingSM,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppSpacing.radiusSM),
+          ),
+          textStyle: AppTypography.labelLarge,
+        ),
+      ),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        backgroundColor: Colors.white,
+        selectedItemColor: AppColors.nebulaPurple,
+        unselectedItemColor: Color(0xFF808080),
+        elevation: 8,
+        type: BottomNavigationBarType.fixed,
+      ),
+      textTheme: AppTypography.getTextTheme().apply(
+        bodyColor: const Color(0xFF1A1A1A),
+        displayColor: const Color(0xFF1A1A1A),
+      ),
+      dividerTheme: const DividerThemeData(
+        color: Color(0xFFE0E0E0),
+        thickness: 1,
+        space: AppSpacing.sm,
+      ),
+    );
   }
 }

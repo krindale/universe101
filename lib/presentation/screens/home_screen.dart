@@ -4,6 +4,7 @@ import '../../core/theme/app_typography.dart';
 import '../../core/theme/app_spacing.dart';
 import '../widgets/cosmic_background.dart';
 import '../widgets/glass_card.dart';
+import 'settings_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -20,6 +21,17 @@ class HomeScreen extends StatelessWidget {
               expandedHeight: 200,
               floating: true,
               pinned: true,
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.settings),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const SettingsScreen()),
+                    );
+                  },
+                ),
+              ],
               backgroundColor: Colors.transparent,
               flexibleSpace: FlexibleSpaceBar(
                 title: Text(
