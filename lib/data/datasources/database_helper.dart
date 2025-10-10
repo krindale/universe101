@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import '../models/celestial_body.dart';
-import '../models/cosmic_phenomenon.dart';
-import '../models/space_exploration.dart';
-import '../models/user_progress.dart';
+import '../../domain/entities/celestial_body.dart';
+import '../../domain/entities/cosmic_phenomenon.dart';
+import '../../domain/entities/space_exploration.dart';
+import '../../domain/entities/user_progress.dart';
 
 /// SQLite database helper for local storage
 class DatabaseHelper {

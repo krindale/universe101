@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
-import 'theme/app_theme.dart';
-import 'screens/home_screen.dart';
+import 'core/theme/app_theme.dart';
+import 'data/datasources/database_helper.dart';
+import 'data/repositories/planet_repository_impl.dart';
+import 'domain/repositories/planet_repository.dart';
+import 'presentation/screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,21 +16,38 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const CosmoEduApp());
+  // Initialize Database
+  final databaseHelper = DatabaseHelper();
+
+  // Initialize Repositories
+  final planetRepository = PlanetRepositoryImpl(databaseHelper);
+
+  runApp(CosmoEduApp(
+    planetRepository: planetRepository,
+  ));
 }
 
 class CosmoEduApp extends StatelessWidget {
-  const CosmoEduApp({super.key});
+  final PlanetRepository planetRepository;
+
+  const CosmoEduApp({
+    super.key,
+    required this.planetRepository,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Universe101',
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.dark, // Default to dark theme for cosmic feel
-      debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+    return MultiProvider(
+      providers: [
+        Provider<PlanetRepository>.value(value: planetRepository),
+      ],
+      child: MaterialApp(
+        title: 'Universe101',
+        theme: AppTheme.darkTheme,
+        themeMode: ThemeMode.dark,
+        debugShowCheckedModeBanner: false,
+        home: const HomeScreen(),
+      ),
     );
   }
 }

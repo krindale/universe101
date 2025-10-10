@@ -1,10 +1,10 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
-import 'package:universe101/database/database_helper.dart';
-import 'package:universe101/models/celestial_body.dart';
-import 'package:universe101/models/cosmic_phenomenon.dart';
-import 'package:universe101/models/space_exploration.dart';
-import 'package:universe101/models/user_progress.dart';
+import 'package:universe101/data/datasources/database_helper.dart';
+import 'package:universe101/domain/entities/celestial_body.dart';
+import 'package:universe101/domain/entities/cosmic_phenomenon.dart';
+import 'package:universe101/domain/entities/space_exploration.dart';
+import 'package:universe101/domain/entities/user_progress.dart';
 
 void main() {
   // Initialize FFI for testing
