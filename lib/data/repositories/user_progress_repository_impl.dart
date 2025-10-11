@@ -325,4 +325,109 @@ class UserProgressRepositoryImpl implements UserProgressRepository {
       throw Exception('Failed to delete user progress: $e');
     }
   }
+
+  @override
+  Future<UserProgress> markForReviewLater(String userId, String cardId) async {
+    try {
+      final progress = await getUserProgress(userId);
+      if (progress == null) {
+        throw Exception('User progress not found');
+      }
+
+      final updated = progress.markForReviewLater(cardId);
+      return await updateUserProgress(updated);
+    } catch (e) {
+      throw Exception('Failed to mark card for review later: $e');
+    }
+  }
+
+  @override
+  Future<UserProgress> unmarkForReviewLater(String userId, String cardId) async {
+    try {
+      final progress = await getUserProgress(userId);
+      if (progress == null) {
+        throw Exception('User progress not found');
+      }
+
+      final updated = progress.unmarkForReviewLater(cardId);
+      return await updateUserProgress(updated);
+    } catch (e) {
+      throw Exception('Failed to unmark card from review later: $e');
+    }
+  }
+
+  @override
+  Future<UserProgress> hideCard(String userId, String cardId) async {
+    try {
+      final progress = await getUserProgress(userId);
+      if (progress == null) {
+        throw Exception('User progress not found');
+      }
+
+      final updated = progress.hideCard(cardId);
+      return await updateUserProgress(updated);
+    } catch (e) {
+      throw Exception('Failed to hide card: $e');
+    }
+  }
+
+  @override
+  Future<UserProgress> unhideCard(String userId, String cardId) async {
+    try {
+      final progress = await getUserProgress(userId);
+      if (progress == null) {
+        throw Exception('User progress not found');
+      }
+
+      final updated = progress.unhideCard(cardId);
+      return await updateUserProgress(updated);
+    } catch (e) {
+      throw Exception('Failed to unhide card: $e');
+    }
+  }
+
+  @override
+  Future<UserProgress> resetCardProgress(String userId, String cardId) async {
+    try {
+      final progress = await getUserProgress(userId);
+      if (progress == null) {
+        throw Exception('User progress not found');
+      }
+
+      final updated = progress.resetCardProgress(cardId);
+      return await updateUserProgress(updated);
+    } catch (e) {
+      throw Exception('Failed to reset card progress: $e');
+    }
+  }
+
+  @override
+  Future<Map<String, dynamic>> exportLearningData(String userId) async {
+    try {
+      final progress = await getUserProgress(userId);
+      if (progress == null) {
+        throw Exception('User progress not found');
+      }
+
+      final stats = await getCompletionStats(userId);
+
+      return {
+        'userId': userId,
+        'exportedAt': DateTime.now().toIso8601String(),
+        'progress': progress.toJson(),
+        'statistics': stats,
+        'completedCards': progress.completedLearningCards.entries
+            .where((e) => e.value == true)
+            .map((e) => e.key)
+            .toList(),
+        'reviewLaterCards': progress.reviewLaterCards.entries
+            .where((e) => e.value == true)
+            .map((e) => e.key)
+            .toList(),
+        'hiddenCards': progress.hiddenCards,
+      };
+    } catch (e) {
+      throw Exception('Failed to export learning data: $e');
+    }
+  }
 }

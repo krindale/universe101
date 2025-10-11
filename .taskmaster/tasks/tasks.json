@@ -2,7 +2,7 @@
   "master": {
     "tasks": [
       {
-        "id": 1,
+        "id": "1",
         "title": "Set up project dependencies and configuration",
         "description": "Configure Flutter project with required dependencies for 3D models, Firebase integration, and local storage",
         "details": "Add dependencies to pubspec.yaml: firebase_core, cloud_firestore, sqflite, shared_preferences, model_viewer_plus (for 3D models), cached_network_image. Update app configuration files and initialize Firebase. Clean up default Flutter template code and remove unused demo components.",
@@ -13,7 +13,7 @@
         "subtasks": []
       },
       {
-        "id": 2,
+        "id": "2",
         "title": "Create data models and local database structure",
         "description": "Implement comprehensive data models for planets, cosmic phenomena, and space exploration missions",
         "details": "Extend existing CelestialBody and Planet models. Create models for CosmicPhenomenon (eclipses, auroras, supernovas, etc.), SpaceExploration (missions, spacecraft, timeline events), and UserProgress. Implement SQLite database schema with tables for storing educational content, user favorites, and progress tracking. Create data access layer with CRUD operations.",
@@ -26,7 +26,7 @@
         "subtasks": []
       },
       {
-        "id": 3,
+        "id": "3",
         "title": "Implement solar system content and data",
         "description": "Create comprehensive solar system data including all planets, moons, and interesting episodes",
         "details": "Populate database with detailed information for Sun and 8 planets including: physical characteristics (diameter, distance, atmosphere composition), interesting episodes (Mars canal controversy, Saturn ring formation), exploration history, and high-quality low-poly 3D model references. Include major moons for gas giants. Implement data seeding functionality.",
@@ -39,7 +39,7 @@
         "subtasks": []
       },
       {
-        "id": 4,
+        "id": "4",
         "title": "Create cosmic phenomena content system",
         "description": "Implement content system for cosmic phenomena with historical context and storytelling",
         "details": "Create content for eclipses (solar/lunar), auroras, supernovas, black holes, gravitational lensing, meteor showers, nebulae, star formation, and comet orbital changes. Include historical stories (ancient eclipse fears, 1919 Einstein relativity proof). Implement content categorization and filtering. Add visual aids and animation descriptions for each phenomenon.",
@@ -52,7 +52,7 @@
         "subtasks": []
       },
       {
-        "id": 5,
+        "id": "5",
         "title": "Develop space exploration timeline and mission database",
         "description": "Create comprehensive space exploration history with missions, achievements, and timeline visualization",
         "details": "Implement content for major missions: Apollo 11, Voyager 1/2, Curiosity, Perseverance, James Webb Space Telescope, Artemis project. Create timeline visualization component with chronological ordering. Include mission objectives, key achievements, real exploration footage/images, and current status. Implement mission detail views with rich multimedia content.",
@@ -65,7 +65,7 @@
         "subtasks": []
       },
       {
-        "id": 6,
+        "id": "6",
         "title": "Implement navigation system and app structure",
         "description": "Create orbital-style navigation and card-based information display system",
         "details": "Enhance existing home screen with orbital navigation pattern. Implement bottom navigation or drawer with sections: Solar System, Cosmic Phenomena, Space Exploration, Favorites, Settings. Create card-based layouts for content display with smooth animations. Implement proper routing using named routes and navigation transitions that match the space theme.",
@@ -78,7 +78,7 @@
         "subtasks": []
       },
       {
-        "id": 7,
+        "id": "7",
         "title": "Build 3D planet viewer and interactive models",
         "description": "Implement 3D planet models with rotation, zoom, and interactive features",
         "details": "Integrate model_viewer_plus for 3D planet display. Create or source low-poly 3D models for all planets and major moons. Implement touch controls for rotation and zoom. Add information hotspots on 3D models that display facts when tapped. Ensure smooth 60fps performance and loading indicators for model assets.",
@@ -92,7 +92,7 @@
         "subtasks": []
       },
       {
-        "id": 8,
+        "id": "8",
         "title": "Implement learning cards system",
         "description": "Create interactive learning cards with progress tracking",
         "details": "Design and implement swipeable learning cards for quick facts and episodes. Implement user progress tracking to show completion status. Add card categories and filtering options. Include sharing functionality for interesting facts.",
@@ -102,7 +102,7 @@
           "2",
           "6"
         ],
-        "status": "done",
+        "status": "cancelled",
         "subtasks": [
           {
             "id": 1,
@@ -165,10 +165,10 @@
             "updatedAt": "2025-10-11T09:15:48.333Z"
           }
         ],
-        "updatedAt": "2025-10-11T09:15:48.333Z"
+        "updatedAt": "2025-10-11T21:57:00.584Z"
       },
       {
-        "id": 9,
+        "id": "9",
         "title": "Develop dark theme and visual design system",
         "description": "Enhance existing dark theme with cosmic color palette and animations",
         "details": "Expand existing AppTheme with complete dark/light theme implementation matching PRD colors (dark navy #0A0F2C, purple #6C63FF, orange #FFB347). Add cosmic-inspired animations, starfield backgrounds, and smooth transitions. Implement theme switching functionality. Create consistent visual hierarchy with proper typography scaling.",
@@ -181,7 +181,7 @@
         "subtasks": []
       },
       {
-        "id": 10,
+        "id": "10",
         "title": "Add notifications and settings functionality",
         "description": "Implement notification system for space events and user settings management",
         "status": "done",
@@ -200,7 +200,8 @@
             "dependencies": [],
             "details": "Implemented settings screen at lib/presentation/screens/settings_screen.dart with theme toggle functionality. Screen includes cosmic background, glass card UI components, and Korean language support. Theme toggle works with existing ThemeProvider using Consumer pattern.",
             "status": "done",
-            "testStrategy": "Theme toggle functionality tests, UI component rendering tests"
+            "testStrategy": "Theme toggle functionality tests, UI component rendering tests",
+            "parentId": "undefined"
           },
           {
             "id": 2,
@@ -209,7 +210,8 @@
             "dependencies": [],
             "details": "Created UserPreferences entity at lib/domain/entities/user_preferences.dart with fields for theme, notifications, language, content difficulty, and favorite topics. Includes JSON serialization, copyWith methods, and helper methods for managing favorite topics.",
             "status": "done",
-            "testStrategy": "Entity serialization tests, copyWith method tests, favorite topics management tests"
+            "testStrategy": "Entity serialization tests, copyWith method tests, favorite topics management tests",
+            "parentId": "undefined"
           },
           {
             "id": 3,
@@ -218,21 +220,98 @@
             "dependencies": [],
             "details": "Added flutter_local_notifications v18.0.1 to pubspec.yaml dependencies. Package is ready for notification service implementation when needed.",
             "status": "done",
-            "testStrategy": "Package installation verification, dependency resolution tests"
+            "testStrategy": "Package installation verification, dependency resolution tests",
+            "parentId": "undefined"
           }
         ]
+      },
+      {
+        "id": "11",
+        "title": "Implement advanced futuristic design system with ChainGPT Labs-inspired space-tech aesthetics",
+        "description": "Redesign the entire app with a comprehensive futuristic space-tech design system featuring deep space purple/blue with cosmic orange/cyan accents, advanced particle effects, constellation patterns, angular UI components with glow effects, and immersive animations throughout all screens.",
+        "details": "Build upon existing cosmic theme system to create ChainGPT Labs-inspired futuristic design: 1) Enhance color palette with deeper space purples (#2D1B4E, #1A0B2E), cosmic cyan (#00FFFF), and vibrant orange (#FF6B35) accents. 2) Implement advanced particle systems using CustomPainter for floating particles, constellation connections, and nebula effects in CosmicBackground widget. 3) Create angular glassmorphism components with hexagonal shapes, sharp edges, and subtle neon glow borders using BoxShadow with glow effects. 4) Add sophisticated animation library with page transitions, micro-interactions, and parallax scrolling using AnimationController and Tween animations. 5) Implement dynamic cosmic backgrounds with moving star fields, pulsing nebulae, and aurora-like effects. 6) Enhance typography with bold, futuristic fonts using Google Fonts (Orbitron, Exo 2) for headings and technical text. 7) Create consistent visual language with geometric patterns, holographic effects, and space-tech inspired iconography. 8) Add smooth transitions between screens with fade, slide, and scale effects. 9) Implement hover/press states with glow animations and ripple effects. 10) Create immersive loading states with particle animations and progress indicators. Update all existing screens (SolarSystemScreen, PhenomenaScreen, ExplorationScreen, LearningCardsScreen, SettingsScreen) to use new design system components.",
+        "testStrategy": "Design system validation tests including color contrast accessibility compliance (WCAG 2.1 AA), animation performance benchmarks maintaining 60fps, cross-platform UI consistency tests on iOS/Android, glassmorphism effect rendering verification, particle animation performance profiling, typography readability assessments, navigation transition smoothness validation, and user interaction responsiveness testing across all screen sizes and device orientations.",
+        "status": "in-progress",
+        "dependencies": [
+          "9"
+        ],
+        "priority": "high",
+        "subtasks": [
+          {
+            "id": 1,
+            "title": "Enhance color palette with ChainGPT Labs-inspired space-tech colors",
+            "description": "Update AppColors class to include deeper space purples, cosmic cyan, and vibrant orange accents for ChainGPT Labs aesthetic",
+            "dependencies": [],
+            "details": "Modify lib/core/theme/app_colors.dart to add new futuristic colors: deeper space purples (#2D1B4E, #1A0B2E), cosmic cyan (#00FFFF), and vibrant orange (#FF6B35) accents. Update existing cosmic gradient to use deeper colors and create new gradients for space-tech aesthetics. Ensure all color combinations meet WCAG 2.1 AA accessibility standards for contrast ratios.",
+            "status": "done",
+            "testStrategy": "Color contrast testing using WCAG 2.1 AA standards, visual regression tests for all existing screens, accessibility testing with screen readers",
+            "parentId": "undefined",
+            "updatedAt": "2025-10-11T21:54:12.686Z"
+          },
+          {
+            "id": 2,
+            "title": "Implement advanced particle systems for floating particles and constellation effects",
+            "description": "Enhance CosmicBackground widget with advanced CustomPainter for floating particles, constellation connections, and nebula effects",
+            "dependencies": [
+              1
+            ],
+            "details": "Extend lib/presentation/widgets/cosmic_background.dart with new ParticleSystemPainter that creates floating particles, constellation connection lines, and nebula effects. Implement performance-optimized rendering using Canvas API. Add configurable particle density, movement patterns, and interactive constellation connections. Use new color palette for particle effects.",
+            "status": "done",
+            "testStrategy": "Performance testing to maintain 60fps, particle animation accuracy tests, memory usage profiling, cross-platform rendering consistency tests",
+            "parentId": "undefined",
+            "updatedAt": "2025-10-11T21:55:43.357Z"
+          },
+          {
+            "id": 3,
+            "title": "Create angular glassmorphism components with hexagonal shapes and neon glow effects",
+            "description": "Enhance GlassCard widget with angular hexagonal shapes, sharp edges, and subtle neon glow borders using BoxShadow effects",
+            "dependencies": [
+              1
+            ],
+            "details": "Modify lib/presentation/widgets/glass_card.dart to support hexagonal and angular shapes using custom ClipPath. Add neon glow effects using multiple BoxShadow layers with new color palette. Create variants: HexagonalGlassCard, AngularGlassCard, and NeonGlowCard. Implement smooth hover states with glow intensity transitions. Ensure glassmorphism effects work consistently across platforms.",
+            "status": "pending",
+            "testStrategy": "Visual rendering tests across platforms, glow effect performance testing, shape clipping accuracy verification, interaction state testing",
+            "parentId": "undefined"
+          },
+          {
+            "id": 4,
+            "title": "Add futuristic typography with Orbitron and Exo 2 fonts",
+            "description": "Update AppTypography to include bold, futuristic fonts using Google Fonts (Orbitron, Exo 2) for headings and technical text",
+            "dependencies": [
+              1
+            ],
+            "details": "Modify lib/core/theme/app_typography.dart to integrate Orbitron for display/headline styles and Exo 2 for body text. Create futuristic text styles with appropriate letter spacing and font weights. Add special technical text styles for data displays and UI labels. Ensure proper fallback fonts and loading optimization. Update pubspec.yaml if additional font weights are needed.",
+            "status": "pending",
+            "testStrategy": "Font loading performance tests, cross-platform font rendering consistency, readability testing across different screen sizes, fallback font verification",
+            "parentId": "undefined"
+          },
+          {
+            "id": 5,
+            "title": "Create sophisticated animation library with page transitions and micro-interactions",
+            "description": "Implement comprehensive animation system with page transitions, micro-interactions, and parallax scrolling using AnimationController and Tween animations",
+            "dependencies": [
+              1,
+              2,
+              3,
+              4
+            ],
+            "details": "Create new animation library in lib/core/animations/ with pre-built page transitions (fade, slide, scale), micro-interactions for buttons and cards, and parallax scrolling effects. Implement FuturisticPageRoute for custom transitions, GlowAnimations for interactive states, and ParallaxScrollView for immersive scrolling. Use new color palette for animation highlights and ensure 60fps performance across all animations.",
+            "status": "pending",
+            "testStrategy": "Animation performance benchmarking at 60fps, transition smoothness testing, memory usage during animations, accessibility testing for motion preferences, cross-platform animation consistency",
+            "parentId": "undefined"
+          }
+        ],
+        "updatedAt": "2025-10-11T21:55:43.357Z"
       }
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-10-11T09:19:14.991Z",
-      "taskCount": 10,
+      "lastModified": "2025-10-11T21:57:00.587Z",
+      "taskCount": 11,
       "completedCount": 9,
       "tags": [
         "master"
-      ],
-      "created": "2025-10-11T09:21:23.571Z",
-      "description": "Tasks for master context"
+      ]
     }
   }
 }

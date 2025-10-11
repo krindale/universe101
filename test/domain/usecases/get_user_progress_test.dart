@@ -87,6 +87,36 @@ class MockUserProgressRepository implements UserProgressRepository {
   Future<void> deleteUserProgress(String userId) async {
     throw UnimplementedError();
   }
+
+  @override
+  Future<UserProgress> markForReviewLater(String userId, String cardId) async {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<UserProgress> unmarkForReviewLater(String userId, String cardId) async {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<UserProgress> hideCard(String userId, String cardId) async {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<UserProgress> unhideCard(String userId, String cardId) async {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<UserProgress> resetCardProgress(String userId, String cardId) async {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Map<String, dynamic>> exportLearningData(String userId) async {
+    throw UnimplementedError();
+  }
 }
 
 void main() {
