@@ -9,7 +9,10 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(flutter:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(task-master:*)",
+      "Bash(mkdir:*)",
+      "Bash(touch:*)"
     ],
     "deny": [],
     "ask": []

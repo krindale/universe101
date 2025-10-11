@@ -58,6 +58,9 @@ dependencies:
   flutter_svg: ^2.0.14
   google_fonts: ^6.2.1
 
+  # Sharing
+  share_plus: ^10.1.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,0 +1,11 @@
+# Task ID: 4
+# Title: Create cosmic phenomena content system
+# Status: done
+# Dependencies: 2
+# Priority: medium
+# Description: Implement content system for cosmic phenomena with historical context and storytelling
+# Details:
+Create content for eclipses (solar/lunar), auroras, supernovas, black holes, gravitational lensing, meteor showers, nebulae, star formation, and comet orbital changes. Include historical stories (ancient eclipse fears, 1919 Einstein relativity proof). Implement content categorization and filtering. Add visual aids and animation descriptions for each phenomenon.
+
+# Test Strategy:
+Content validation tests, historical accuracy verification, categorization and search functionality tests

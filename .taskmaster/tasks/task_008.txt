@@ -1,0 +1,123 @@
+# Task ID: 8
+# Title: Implement learning cards system
+# Status: in-progress
+# Dependencies: 2, 6
+# Priority: medium
+# Description: Create interactive learning cards with progress tracking
+# Details:
+Design and implement swipeable learning cards for quick facts and episodes. Implement user progress tracking to show completion status. Add card categories and filtering options. Include sharing functionality for interesting facts.
+
+# Test Strategy:
+Card interaction tests, progress tracking accuracy, sharing functionality tests
+
+# Subtasks:
+## 1. Implement progress tracking repository and use cases [done]
+### Dependencies: None
+### Description: Create repository interfaces and use cases for managing user progress data including learning card completion tracking
+### Details:
+Create UserProgressRepository interface with methods for getting, updating, and creating user progress. Implement UserProgressRepositoryImpl with local database storage. Create use cases: GetUserProgress, UpdateUserProgress, MarkCardAsCompleted, GetCompletionStats. Include proper error handling and data validation. Progress data should persist across app sessions.
+<info added on 2025-10-10T17:57:43.869Z>
+I'll analyze the codebase to understand the current implementation and then generate the appropriate update for this subtask.Based on my analysis of the codebase and the user's completion report for Task 8.1, here is the update text that should be appended to the subtask:
+
+**Task 8.1 완료 - 진행 상황 추적 Repository 및 Use Cases 구현 완료**
+
+구현된 주요 컴포넌트:
+1. **Domain Layer**: UserProgressRepository 인터페이스 (lib/domain/repositories/user_progress_repository.dart)
+2. **Use Cases**: GetUserProgress, UpdateUserProgress, MarkCardAsCompleted, GetCompletionStats (lib/domain/usecases/)  
+3. **Data Layer**: UserProgressRepositoryImpl SQLite 기반 구현 (lib/data/repositories/user_progress_repository_impl.dart)
+4. **Error Handling**: 모든 메서드에 ArgumentError 및 Exception 처리 완료
+5. **Unit Tests**: GetUserProgress (5개), MarkCardAsCompleted (8개) 테스트 케이스 통과
+
+주요 기능 완료:
+- 사용자 진행 상황 CRUD 작업
+- 학습 카드 완료 추적 (단일/배치)
+- 즐겨찾기 관리 (천체, 현상, 탐사)
+- 학습 시간 추적
+- 완료 통계 및 마일스톤 (10, 25, 50, 100, 250, 500, 1000)
+
+미구현 기능 (향후 Task에서 처리):
+- 시간 기반 완료 통계 (완료 타임스탬프 필요)
+- 카테고리별 완료 통계 (카드 데이터 접근 필요)
+</info added on 2025-10-10T17:57:43.869Z>
+
+## 2. Create learning card sharing functionality [done]
+### Dependencies: 8.1
+### Description: Implement sharing feature to allow users to share interesting facts and learning cards with others
+### Details:
+Implement share functionality using Flutter's share_plus package. Create ShareService with methods to share card content as text, with card details formatted nicely. Include card title, content, category, and app attribution. Add share button to card detail modal and swipeable card interface. Support sharing via social media, messaging apps, and copy to clipboard. Include deep linking support for shared cards.
+<info added on 2025-10-11T05:00:26.572Z>
+I'll analyze the codebase first to understand the current implementation and then provide the completion update.Task 8.2 완료 - 학습 카드 공유 기능 구현 완료
+
+완료된 작업:
+1. **패키지 추가**
+   - share_plus ^10.1.3 패키지 추가 (pubspec.yaml:62)
+
+2. **ShareService 생성** (lib/domain/services/share_service.dart)
+   - shareLearningCard(): 기본 텍스트 공유
+   - shareForSocialMedia(): 소셜 미디어용 짧은 형식
+   - shareMultipleCards(): 여러 카드 일괄 공유
+   - shareCardWithPosition(): iPadOS 팝오버 지원
+   - formatAsPlainText(): 일반 텍스트 포맷
+   - formatAsMarkdown(): 마크다운 포맷
+   - formatForEmail(): HTML 이메일 포맷
+
+3. **UI 통합**
+   - SwipeableCard에 공유 버튼 추가 (lib/presentation/widgets/swipeable_card.dart:155-161)
+   - LearningCardsScreen에 ShareService 통합 (lib/presentation/screens/learning_cards_screen.dart:58-71)
+   - 에러 처리 및 사용자 피드백 구현
+
+4. **텍스트 포맷팅**
+   - 카드 제목, 내용, 카테고리, 난이도, 태그 포함
+   - 앱 attribution (Universe 101)
+   - Deep link 지원 (universe101://card/{id})
+   - 이모지 및 구분선으로 가독성 향상
+   - 카테고리별 이모지 (🪐 행성, ✨ 현상, 🚀 탐사, 🌌 일반)
+
+5. **테스트 작성** (test/domain/services/share_service_test.dart)
+   - 17개 테스트 케이스 모두 통과 ✅
+   - 텍스트 포맷팅 검증
+   - 카테고리 및 난이도 표시 검증
+   - 태그 및 Deep link 검증
+   - 여러 카드 공유 검증
+
+주요 기능:
+- ✅ 학습 카드 텍스트 공유 (소셜 미디어, 메시징 앱, 클립보드)
+- ✅ 다양한 포맷 지원 (일반 텍스트, 마크다운, HTML)
+- ✅ 카드 정보 완전 포함 (제목, 내용, 카테고리, 난이도, 태그)
+- ✅ Deep link 지원으로 앱으로 다시 연결
+- ✅ 여러 카드 일괄 공유
+- ✅ iPadOS 팝오버 위치 지정 지원
+- ✅ 에러 처리 및 사용자 피드백
+
+미구현 사항 (선택적):
+- 카드 상세 모달에 공유 버튼 (현재 SwipeableCard에만 있음)
+- 이미지 포함 공유 (현재 텍스트만)
+</info added on 2025-10-11T05:00:26.572Z>
+
+## 3. Implement learning card filtering and search [pending]
+### Dependencies: None
+### Description: Add advanced filtering options and search functionality for learning cards
+### Details:
+Extend existing category filter with additional filters: difficulty level, tags, completion status (completed/not completed), and date added. Add search bar to filter cards by title and content. Implement search suggestions and autocomplete for tags. Create FilterState management with Provider/Riverpod. Add filter persistence so user preferences are remembered. Include clear filters and reset options.
+
+## 4. Integrate progress tracking with card interactions [pending]
+### Dependencies: 8.1, 8.3
+### Description: Connect the swipeable card system with user progress tracking to persist learning completion
+### Details:
+Modify LearningCardsScreen to use UserProgressRepository instead of local state for completion tracking. Update SwipeableCard and card interaction callbacks to save progress to database. Implement real-time progress updates in UI. Add statistics display showing cards completed today, this week, total completion percentage. Include achievement badges for milestones (10, 50, 100 cards completed). Show progress indicators on category filters.
+
+## 5. Add learning card management features [pending]
+### Dependencies: 8.1, 8.2
+### Description: Implement card management features including organization, review tracking, and statistics (favorites system removed)
+### Details:
+Add favorite button to learning cards allowing users to save interesting cards. Implement favorites tab/filter to show only favorited cards. Create card management features: mark for review later, hide cards permanently, reset progress for specific cards. Add learning card statistics dashboard showing completion rates by category, time spent learning, favorite topics. Include export functionality for user's learning data and favorites list.
+<info added on 2025-10-11T05:04:52.611Z>
+I'll analyze the project structure to understand the current codebase and provide an accurate update for the subtask.Based on my analysis of the codebase, I can see that favorites functionality exists in the current system but the user wants it removed. The current implementation includes:
+
+1. Favorites tracking in `lib/domain/entities/user_progress.dart` (favoriteCelestialBodies, favoritePhenomena, favoriteExplorations)
+2. Navigation shows 4 tabs: 태양계, 현상, 탐사, 학습 (with no favorites tab visible)
+3. Learning cards have a heart/favorite icon in the action buttons but it's used for "학습완료" (learning completion)
+
+UPDATE: Remove all favorites-related functionality from this subtask. Focus solely on learning card management features: create card organization system with category-based filtering (already implemented with planet, phenomenon, exploration, general categories), add card difficulty sorting options, implement card search functionality, create card review tracking (mark cards for later review), add card hiding/archiving capability, implement card progress reset functionality, and create learning statistics dashboard showing completion rates by category and time spent learning. Remove any references to favorites system, favorites tab, or favorite button functionality since these have been removed from the app architecture.
+</info added on 2025-10-11T05:04:52.611Z>
+

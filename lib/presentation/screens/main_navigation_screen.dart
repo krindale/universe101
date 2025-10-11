@@ -4,6 +4,7 @@ import '../../core/theme/app_typography.dart';
 import 'solar_system_screen.dart';
 import 'phenomena_screen.dart';
 import 'exploration_screen.dart';
+import 'learning_cards_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -19,6 +20,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     SolarSystemScreen(),
     PhenomenaScreen(),
     ExplorationScreen(),
+    LearningCardsScreen(),
   ];
 
   @override
@@ -66,6 +68,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                   index: 2,
                   icon: Icons.rocket_launch,
                   label: '탐사',
+                ),
+                _buildNavItem(
+                  index: 3,
+                  icon: Icons.school,
+                  label: '학습',
                 ),
               ],
             ),

@@ -6,6 +6,8 @@ class UserProgress {
   final List<String> favoritePhenomena;
   final List<String> favoriteExplorations;
   final Map<String, bool> completedLearningCards; // cardId: completed
+  final Map<String, bool> reviewLaterCards; // cardId: marked for review
+  final List<String> hiddenCards; // cardId: hidden/archived cards
   final int totalCardsViewed;
   final int totalTimeSpentMinutes;
   final DateTime? lastActiveAt;
@@ -19,6 +21,8 @@ class UserProgress {
     required this.favoritePhenomena,
     required this.favoriteExplorations,
     required this.completedLearningCards,
+    this.reviewLaterCards = const {},
+    this.hiddenCards = const [],
     required this.totalCardsViewed,
     required this.totalTimeSpentMinutes,
     this.lastActiveAt,
@@ -35,6 +39,8 @@ class UserProgress {
       'favoritePhenomena': favoritePhenomena,
       'favoriteExplorations': favoriteExplorations,
       'completedLearningCards': completedLearningCards,
+      'reviewLaterCards': reviewLaterCards,
+      'hiddenCards': hiddenCards,
       'totalCardsViewed': totalCardsViewed,
       'totalTimeSpentMinutes': totalTimeSpentMinutes,
       'lastActiveAt': lastActiveAt?.toIso8601String(),
@@ -55,6 +61,12 @@ class UserProgress {
           List<String>.from(json['favoriteExplorations'] as List),
       completedLearningCards:
           Map<String, bool>.from(json['completedLearningCards'] as Map),
+      reviewLaterCards: json['reviewLaterCards'] != null
+          ? Map<String, bool>.from(json['reviewLaterCards'] as Map)
+          : {},
+      hiddenCards: json['hiddenCards'] != null
+          ? List<String>.from(json['hiddenCards'] as List)
+          : [],
       totalCardsViewed: json['totalCardsViewed'] as int,
       totalTimeSpentMinutes: json['totalTimeSpentMinutes'] as int,
       lastActiveAt: json['lastActiveAt'] != null
@@ -69,6 +81,115 @@ class UserProgress {
     );
   }
 
+  /// Mark a card for review later
+  UserProgress markForReviewLater(String cardId) {
+    final updatedReviewCards = Map<String, bool>.from(reviewLaterCards);
+    updatedReviewCards[cardId] = true;
+
+    return UserProgress(
+      id: id,
+      userId: userId,
+      favoriteCelestialBodies: favoriteCelestialBodies,
+      favoritePhenomena: favoritePhenomena,
+      favoriteExplorations: favoriteExplorations,
+      completedLearningCards: completedLearningCards,
+      reviewLaterCards: updatedReviewCards,
+      hiddenCards: hiddenCards,
+      totalCardsViewed: totalCardsViewed,
+      totalTimeSpentMinutes: totalTimeSpentMinutes,
+      lastActiveAt: DateTime.now(),
+      createdAt: createdAt,
+      updatedAt: DateTime.now(),
+    );
+  }
+
+  /// Unmark a card from review later
+  UserProgress unmarkForReviewLater(String cardId) {
+    final updatedReviewCards = Map<String, bool>.from(reviewLaterCards);
+    updatedReviewCards.remove(cardId);
+
+    return UserProgress(
+      id: id,
+      userId: userId,
+      favoriteCelestialBodies: favoriteCelestialBodies,
+      favoritePhenomena: favoritePhenomena,
+      favoriteExplorations: favoriteExplorations,
+      completedLearningCards: completedLearningCards,
+      reviewLaterCards: updatedReviewCards,
+      hiddenCards: hiddenCards,
+      totalCardsViewed: totalCardsViewed,
+      totalTimeSpentMinutes: totalTimeSpentMinutes,
+      lastActiveAt: DateTime.now(),
+      createdAt: createdAt,
+      updatedAt: DateTime.now(),
+    );
+  }
+
+  /// Hide a card (archive it)
+  UserProgress hideCard(String cardId) {
+    if (hiddenCards.contains(cardId)) return this;
+
+    return UserProgress(
+      id: id,
+      userId: userId,
+      favoriteCelestialBodies: favoriteCelestialBodies,
+      favoritePhenomena: favoritePhenomena,
+      favoriteExplorations: favoriteExplorations,
+      completedLearningCards: completedLearningCards,
+      reviewLaterCards: reviewLaterCards,
+      hiddenCards: [...hiddenCards, cardId],
+      totalCardsViewed: totalCardsViewed,
+      totalTimeSpentMinutes: totalTimeSpentMinutes,
+      lastActiveAt: DateTime.now(),
+      createdAt: createdAt,
+      updatedAt: DateTime.now(),
+    );
+  }
+
+  /// Unhide a card (restore from archive)
+  UserProgress unhideCard(String cardId) {
+    return UserProgress(
+      id: id,
+      userId: userId,
+      favoriteCelestialBodies: favoriteCelestialBodies,
+      favoritePhenomena: favoritePhenomena,
+      favoriteExplorations: favoriteExplorations,
+      completedLearningCards: completedLearningCards,
+      reviewLaterCards: reviewLaterCards,
+      hiddenCards: hiddenCards.where((id) => id != cardId).toList(),
+      totalCardsViewed: totalCardsViewed,
+      totalTimeSpentMinutes: totalTimeSpentMinutes,
+      lastActiveAt: DateTime.now(),
+      createdAt: createdAt,
+      updatedAt: DateTime.now(),
+    );
+  }
+
+  /// Reset progress for a specific card
+  UserProgress resetCardProgress(String cardId) {
+    final updatedCompletedCards = Map<String, bool>.from(completedLearningCards);
+    updatedCompletedCards.remove(cardId);
+
+    final updatedReviewCards = Map<String, bool>.from(reviewLaterCards);
+    updatedReviewCards.remove(cardId);
+
+    return UserProgress(
+      id: id,
+      userId: userId,
+      favoriteCelestialBodies: favoriteCelestialBodies,
+      favoritePhenomena: favoritePhenomena,
+      favoriteExplorations: favoriteExplorations,
+      completedLearningCards: updatedCompletedCards,
+      reviewLaterCards: updatedReviewCards,
+      hiddenCards: hiddenCards,
+      totalCardsViewed: totalCardsViewed > 0 ? totalCardsViewed - 1 : 0,
+      totalTimeSpentMinutes: totalTimeSpentMinutes,
+      lastActiveAt: DateTime.now(),
+      createdAt: createdAt,
+      updatedAt: DateTime.now(),
+    );
+  }
+
   /// Add a favorite celestial body
   UserProgress addFavoriteCelestialBody(String bodyId) {
     if (favoriteCelestialBodies.contains(bodyId)) return this;
@@ -80,6 +201,8 @@ class UserProgress {
       favoritePhenomena: favoritePhenomena,
       favoriteExplorations: favoriteExplorations,
       completedLearningCards: completedLearningCards,
+      reviewLaterCards: reviewLaterCards,
+      hiddenCards: hiddenCards,
       totalCardsViewed: totalCardsViewed,
       totalTimeSpentMinutes: totalTimeSpentMinutes,
       lastActiveAt: DateTime.now(),
@@ -99,6 +222,8 @@ class UserProgress {
       favoritePhenomena: favoritePhenomena,
       favoriteExplorations: favoriteExplorations,
       completedLearningCards: completedLearningCards,
+      reviewLaterCards: reviewLaterCards,
+      hiddenCards: hiddenCards,
       totalCardsViewed: totalCardsViewed,
       totalTimeSpentMinutes: totalTimeSpentMinutes,
       lastActiveAt: DateTime.now(),
@@ -119,6 +244,8 @@ class UserProgress {
       favoritePhenomena: favoritePhenomena,
       favoriteExplorations: favoriteExplorations,
       completedLearningCards: updatedCards,
+      reviewLaterCards: reviewLaterCards,
+      hiddenCards: hiddenCards,
       totalCardsViewed: totalCardsViewed + 1,
       totalTimeSpentMinutes: totalTimeSpentMinutes,
       lastActiveAt: DateTime.now(),
