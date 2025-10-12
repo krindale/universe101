@@ -213,7 +213,7 @@ class _AdvancedParticleSystemState extends State<AdvancedParticleSystem>
       case ParticleType.nebula:
         return AppColorsExtended.particlePurple;
       case ParticleType.plasma:
-        return AppColorsExtended.particlePink;
+        return AppColorsExtended.particleOrange;
     }
   }
 

@@ -12,7 +12,15 @@
       "Bash(cat:*)",
       "Bash(task-master:*)",
       "Bash(mkdir:*)",
-      "Bash(touch:*)"
+      "Bash(touch:*)",
+      "Bash(nc localhost 5449)",
+      "Bash(adb:*)",
+      "Read(//c/Users/wow32/AppData/Local/Android/Sdk/platform-tools/**)",
+      "Bash(./adb.exe shell input text:*)",
+      "Bash(./adb.exe shell input tap:*)",
+      "Bash(./adb.exe shell input keyevent 4)",
+      "Bash(./adb.exe shell am start -n com.example.universe101/.MainActivity)",
+      "Bash(git log:*)"
     ],
     "deny": [],
     "ask": []

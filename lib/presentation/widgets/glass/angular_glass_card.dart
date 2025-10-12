@@ -42,15 +42,18 @@ class AngularGlassCard extends StatelessWidget {
       margin: margin,
       decoration: BoxDecoration(
         color: backgroundColor ?? AppColorsExtended.glassAngular,
+        // Sharp corners - no border radius (ChainGPT style)
         border: Border.all(
-          color: borderColor ?? AppColorsExtended.neonGlowCyan,
+          color: borderColor ?? AppColorsExtended.chainGPTOrange,
           width: borderWidth,
         ),
+        // Minimal shadow (ChainGPT style)
         boxShadow: enableGlow
-            ? AppColorsExtended.getNeonGlowShadow(
-                color: glowColor ?? AppColorsExtended.cosmicCyan,
-                blurRadius: 15,
-                spreadRadius: 1,
+            ? AppColorsExtended.getGlowShadow(
+                color: glowColor ?? AppColorsExtended.chainGPTOrange,
+                blurRadius: 8,
+                spreadRadius: 0,
+                opacity: 0.2,
               )
             : null,
       ),
@@ -93,10 +96,10 @@ class HexagonalGlassCard extends StatelessWidget {
     return CustomPaint(
       painter: HexagonPainter(
         backgroundColor: backgroundColor ?? AppColorsExtended.glassAngular,
-        borderColor: borderColor ?? AppColorsExtended.neonGlowCyan,
+        borderColor: borderColor ?? AppColorsExtended.chainGPTOrange,
         borderWidth: borderWidth,
         enableGlow: enableGlow,
-        glowColor: glowColor ?? AppColorsExtended.cosmicCyan,
+        glowColor: glowColor ?? AppColorsExtended.chainGPTOrange,
       ),
       child: SizedBox(
         width: size,
@@ -211,15 +214,18 @@ class _AngularGlassButtonState extends State<AngularGlassButton> {
               (_isPressed
                   ? AppColors.glassStrong
                   : AppColorsExtended.glassAngular),
+          // Sharp corners - no border radius (ChainGPT style)
           border: Border.all(
-            color: widget.borderColor ?? AppColorsExtended.cosmicCyan,
+            color: widget.borderColor ?? AppColorsExtended.chainGPTOrange,
             width: 2.0,
           ),
+          // Minimal shadow (ChainGPT style)
           boxShadow: widget.enableGlow && !_isPressed
-              ? AppColorsExtended.getNeonGlowShadow(
-                  color: widget.glowColor ?? AppColorsExtended.cosmicCyan,
-                  blurRadius: 20,
-                  spreadRadius: 2,
+              ? AppColorsExtended.getGlowShadow(
+                  color: widget.glowColor ?? AppColorsExtended.chainGPTOrange,
+                  blurRadius: 8,
+                  spreadRadius: 0,
+                  opacity: 0.2,
                 )
               : null,
         ),
@@ -259,11 +265,13 @@ class TechPanel extends StatelessWidget {
       margin: margin,
       decoration: BoxDecoration(
         color: AppColorsExtended.glassAngular,
+        // Minimal shadow (ChainGPT style)
         boxShadow: enableGlow
-            ? AppColorsExtended.getNeonGlowShadow(
-                color: AppColorsExtended.cosmicCyan,
-                blurRadius: 15,
-                spreadRadius: 1,
+            ? AppColorsExtended.getGlowShadow(
+                color: AppColorsExtended.chainGPTOrange,
+                blurRadius: 8,
+                spreadRadius: 0,
+                opacity: 0.2,
               )
             : null,
       ),
@@ -312,7 +320,7 @@ class TechPanel extends StatelessWidget {
                         child: Text(
                           title!,
                           style: const TextStyle(
-                            color: AppColorsExtended.textNeonCyan,
+                            color: AppColorsExtended.chainGPTOrange,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             letterSpacing: 1.2,
@@ -364,16 +372,19 @@ class AngularGlassChip extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
           color: backgroundColor ?? AppColorsExtended.glassAngular,
+          // Sharp corners - no border radius (ChainGPT style)
           border: Border.all(
-            color: borderColor ?? AppColorsExtended.cosmicCyan,
+            color: borderColor ?? AppColorsExtended.chainGPTOrange,
             width: 1,
           ),
+          // Minimal shadow (ChainGPT style)
           boxShadow: [
             BoxShadow(
-              color: (borderColor ?? AppColorsExtended.cosmicCyan)
-                  .withValues(alpha: 0.3),
+              color: (borderColor ?? AppColorsExtended.chainGPTOrange)
+                  .withValues(alpha: 0.2),
               blurRadius: 8,
-              spreadRadius: 1,
+              spreadRadius: 0,
+              offset: const Offset(0, 2),
             ),
           ],
         ),
@@ -384,14 +395,14 @@ class AngularGlassChip extends StatelessWidget {
               Icon(
                 icon,
                 size: 16,
-                color: textColor ?? AppColorsExtended.textNeonCyan,
+                color: textColor ?? AppColorsExtended.chainGPTOrange,
               ),
               const SizedBox(width: 6),
             ],
             Text(
               label,
               style: TextStyle(
-                color: textColor ?? AppColorsExtended.textNeonCyan,
+                color: textColor ?? AppColorsExtended.chainGPTOrange,
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
               ),

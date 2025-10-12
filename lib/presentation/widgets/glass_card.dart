@@ -1,10 +1,9 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
 
-/// Glassmorphism card widget
-/// Implements 2025 design trend with blur effect and transparency
+/// Clean white card with ChainGPT Labs style
+/// White background, gray borders, sharp corners, minimal shadows
 class GlassCard extends StatelessWidget {
   final Widget child;
   final double? width;
@@ -25,38 +24,32 @@ class GlassCard extends StatelessWidget {
     this.height,
     this.padding,
     this.margin,
-    this.borderRadius = AppSpacing.radiusLG,
+    this.borderRadius = 0, // Sharp corners - ChainGPT Labs style
     this.backgroundColor,
     this.borderColor,
     this.borderWidth = 1.0,
-    this.blurStrength = AppSpacing.blurMD,
+    this.blurStrength = 0, // No blur in ChainGPT Labs style
     this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    final content = ClipRRect(
-      borderRadius: BorderRadius.circular(borderRadius),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(
-          sigmaX: blurStrength,
-          sigmaY: blurStrength,
+    final content = Container(
+      width: width,
+      height: height,
+      padding: padding ?? const EdgeInsets.all(AppSpacing.paddingMD),
+      decoration: BoxDecoration(
+        color: backgroundColor ?? AppColors.cardSurface,
+        // Sharp corners - no border radius (ChainGPT Labs style)
+        borderRadius: borderRadius > 0 ? BorderRadius.circular(borderRadius) : null,
+        border: Border.all(
+          color: borderColor ?? AppColors.borderPrimary,
+          width: borderWidth,
         ),
-        child: Container(
-          width: width,
-          height: height,
-          padding: padding ?? const EdgeInsets.all(AppSpacing.paddingMD),
-          decoration: BoxDecoration(
-            color: backgroundColor ?? AppColors.cardSurface,
-            borderRadius: BorderRadius.circular(borderRadius),
-            border: Border.all(
-              color: borderColor ?? AppColors.glassBorder,
-              width: borderWidth,
-            ),
-          ),
-          child: child,
-        ),
+        // Minimal shadow (ChainGPT Labs style)
+        boxShadow: AppColors.getMinimalShadow(),
       ),
+      child: child,
     );
 
     if (onTap != null) {
@@ -66,7 +59,6 @@ class GlassCard extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             onTap: onTap,
-            borderRadius: BorderRadius.circular(borderRadius),
             child: content,
           ),
         ),

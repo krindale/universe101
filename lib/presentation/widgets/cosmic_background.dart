@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 
-/// Cosmic gradient background widget
-/// Creates immersive space-themed background
+/// Light background widget with ChainGPT Labs style
+/// Clean, minimal, professional appearance
 class CosmicBackground extends StatelessWidget {
   final Widget child;
   final Gradient? gradient;
@@ -17,16 +17,11 @@ class CosmicBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (animated) {
-      return AnimatedCosmicBackground(
-        gradient: gradient,
-        child: child,
-      );
-    }
-
+    // No animation in ChainGPT style - clean and static
     return Container(
-      decoration: BoxDecoration(
-        gradient: gradient ?? AppColors.cosmicGradient,
+      decoration: const BoxDecoration(
+        // Light gray background - ChainGPT Labs style
+        color: AppColors.background,
       ),
       child: child,
     );
@@ -70,19 +65,12 @@ class _AnimatedCosmicBackgroundState extends State<AnimatedCosmicBackground>
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, child) {
-        return CustomPaint(
-          painter: StarsPainter(progress: _controller.value),
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: widget.gradient ?? AppColors.cosmicGradient,
-            ),
-            child: widget.child,
-          ),
-        );
-      },
+    return Container(
+      decoration: const BoxDecoration(
+        // Light gray background - ChainGPT Labs style
+        color: AppColors.background,
+      ),
+      child: widget.child,
     );
   }
 }
