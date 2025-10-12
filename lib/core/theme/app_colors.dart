@@ -1,133 +1,162 @@
 import 'package:flutter/material.dart';
 
-/// Cosmic-themed color palette for Universe101 app
-/// Implements 2025 design trends: Dark Mode + Glassmorphism
+/// ChainGPT Labs-inspired design system
+/// Light theme with white cards, gray borders, and orange accents
 class AppColors {
   AppColors._();
 
-  // ========== Primary Cosmic Colors ==========
+  // ========== Background Colors (ChainGPT Labs Style) ==========
 
-  /// Deep space black - main background
-  static const Color deepSpace = Color(0xFF0A0E27);
+  /// Light gray background - main app background
+  static const Color background = Color(0xFFF5F5F5);
 
-  /// Nebula purple - primary accent
-  static const Color nebulaPurple = Color(0xFF6C63FF);
+  /// Off-white background - alternative
+  static const Color backgroundAlt = Color(0xFFFAFAFA);
 
-  /// Cosmic blue - secondary accent
-  static const Color cosmicBlue = Color(0xFF4A90E2);
+  /// Deep space - for backwards compatibility (now same as background)
+  static const Color deepSpace = Color(0xFFF5F5F5);
 
-  /// Stardust gold - highlights and CTAs
-  static const Color stardustGold = Color(0xFFFFD700);
+  // ========== Primary Colors ==========
 
-  /// Aurora green - success states
-  static const Color auroraGreen = Color(0xFF00FFA3);
+  /// Dark Gray - primary accent (ChainGPT Labs style)
+  static const Color accent = Color(0xFF4A4A4A);
 
-  /// Solar orange - warnings
-  static const Color solarOrange = Color(0xFFFF6B35);
+  /// Dark Gray hover state
+  static const Color accentHover = Color(0xFF5A5A5A);
 
-  /// Supernova red - errors
-  static const Color supernovaRed = Color(0xFFFF2E63);
+  /// Dark Gray pressed state
+  static const Color accentPressed = Color(0xFF3A3A3A);
 
-  // ========== Glassmorphism Colors ==========
+  // ========== Card & Surface Colors ==========
 
-  /// Glass surface with blur effect
-  static const Color glassSurface = Color(0x1AFFFFFF);
+  /// White card surface
+  static const Color cardSurface = Color(0xFFFFFFFF);
 
-  /// Glass border
-  static const Color glassBorder = Color(0x33FFFFFF);
+  /// Glass surface - white with subtle transparency
+  static const Color glassSurface = Color(0xFFFFFFFF);
 
   /// Strong glass for elevated cards
-  static const Color glassStrong = Color(0x26FFFFFF);
+  static const Color glassStrong = Color(0xFFFFFFFF);
 
   /// Subtle glass for backgrounds
-  static const Color glassSubtle = Color(0x0DFFFFFF);
+  static const Color glassSubtle = Color(0xFFFAFAFA);
 
-  // ========== Gradient Colors ==========
+  /// Elevated surface
+  static const Color elevatedSurface = Color(0xFFFFFFFF);
 
-  /// Cosmic gradient - used for backgrounds
-  static const LinearGradient cosmicGradient = LinearGradient(
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-    colors: [
-      Color(0xFF0A0E27), // Deep space
-      Color(0xFF1A1F3A), // Mid space
-      Color(0xFF2D1B4E), // Purple nebula
-    ],
-  );
+  // ========== Border Colors ==========
 
-  /// Nebula gradient - used for cards and surfaces
-  static const LinearGradient nebulaGradient = LinearGradient(
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-    colors: [
-      Color(0xFF6C63FF), // Nebula purple
-      Color(0xFF4A90E2), // Cosmic blue
-    ],
-  );
+  /// Primary border - light gray
+  static const Color borderPrimary = Color(0xFFE0E0E0);
 
-  /// Aurora gradient - used for special effects
-  static const LinearGradient auroraGradient = LinearGradient(
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
-    colors: [
-      Color(0xFF00FFA3), // Aurora green
-      Color(0xFF4A90E2), // Cosmic blue
-      Color(0xFF6C63FF), // Nebula purple
-    ],
-  );
+  /// Secondary border - lighter gray
+  static const Color borderSecondary = Color(0xFFEEEEEE);
+
+  /// Subtle border - very light gray
+  static const Color borderSubtle = Color(0xFFF5F5F5);
+
+  /// Glass border - for backwards compatibility
+  static const Color glassBorder = Color(0xFFE0E0E0);
+
+  /// Dark Gray border (for special cases only)
+  static const Color borderAccent = Color(0xFF4A4A4A);
 
   // ========== Text Colors ==========
 
-  /// Primary text color (white)
-  static const Color textPrimary = Color(0xFFFFFFFF);
+  /// Primary text - black
+  static const Color textPrimary = Color(0xFF000000);
 
-  /// Secondary text color (light gray)
-  static const Color textSecondary = Color(0xFFB0B0B0);
+  /// Secondary text - medium gray
+  static const Color textSecondary = Color(0xFF666666);
 
-  /// Tertiary text color (medium gray)
-  static const Color textTertiary = Color(0xFF808080);
+  /// Tertiary text - light gray
+  static const Color textTertiary = Color(0xFF999999);
 
-  /// Disabled text color
-  static const Color textDisabled = Color(0xFF4D4D4D);
+  /// Disabled text
+  static const Color textDisabled = Color(0xFFCCCCCC);
 
-  // ========== Surface Colors ==========
+  /// Accent text - dark gray (use sparingly)
+  static const Color textAccent = Color(0xFF4A4A4A);
 
-  /// Card surface with glassmorphism
-  static const Color cardSurface = Color(0x1AFFFFFF);
+  // ========== Planet Colors (Kept for backwards compatibility) ==========
 
-  /// Elevated surface
-  static const Color elevatedSurface = Color(0x26FFFFFF);
-
-  /// Overlay background
-  static const Color overlayBackground = Color(0xCC0A0E27);
+  static const Color mercuryGray = Color(0xFF8C8C8C);
+  static const Color venusYellow = Color(0xFFFFC107);
+  static const Color earthBlue = Color(0xFF2196F3);
+  static const Color marsRed = Color(0xFFE53935);
+  static const Color jupiterOrange = Color(0xFFFF9800);
+  static const Color saturnBeige = Color(0xFFFFE082);
+  static const Color uranusCyan = Color(0xFF00BCD4);
+  static const Color neptuneBlue = Color(0xFF3F51B5);
+  static const Color moonGray = Color(0xFFBDBDBD);
+  static const Color sunYellow = Color(0xFFFDD835);
 
   // ========== Semantic Colors ==========
 
-  /// Success color
-  static const Color success = auroraGreen;
-
-  /// Warning color
-  static const Color warning = solarOrange;
-
-  /// Error color
-  static const Color error = supernovaRed;
-
-  /// Info color
-  static const Color info = cosmicBlue;
+  static const Color success = Color(0xFF4CAF50);
+  static const Color warning = Color(0xFFFFA726);
+  static const Color error = Color(0xFFEF5350);
+  static const Color info = Color(0xFF42A5F5);
 
   // ========== Interactive States ==========
 
-  /// Hover state
-  static const Color hoverState = Color(0x1AFFFFFF);
+  /// Hover state - very subtle gray
+  static const Color hoverState = Color(0xFFFAFAFA);
 
-  /// Pressed state
-  static const Color pressedState = Color(0x33FFFFFF);
+  /// Pressed state - light gray
+  static const Color pressedState = Color(0xFFF0F0F0);
 
-  /// Focus state
-  static const Color focusState = Color(0x26FFFFFF);
+  /// Focus state - dark gray outline
+  static const Color focusState = Color(0xFF4A4A4A);
 
   /// Disabled state
-  static const Color disabledState = Color(0x0D808080);
+  static const Color disabledState = Color(0xFFF5F5F5);
+
+  // ========== Overlay ==========
+
+  /// Overlay background - semi-transparent white
+  static const Color overlayBackground = Color(0xF2FFFFFF);
+
+  // ========== DEPRECATED Colors (for migration) ==========
+
+  @Deprecated('Use accent instead')
+  static const Color solarOrange = Color(0xFF4A4A4A);
+
+  @Deprecated('Use accent instead')
+  static const Color stardustGold = Color(0xFF4A4A4A);
+
+  @Deprecated('Use accent instead')
+  static const Color nebulaPurple = Color(0xFF4A4A4A);
+
+  @Deprecated('Use accent instead')
+  static const Color cosmicBlue = Color(0xFF4A4A4A);
+
+  @Deprecated('Use accent instead')
+  static const Color galaxyPurple = Color(0xFF4A4A4A);
+
+  @Deprecated('Use accent instead')
+  static const Color cosmicPink = Color(0xFF4A4A4A);
+
+  @Deprecated('Use accent instead')
+  static const Color auroraGreen = Color(0xFF4A4A4A);
+
+  @Deprecated('Use accent instead')
+  static const Color supernovaRed = Color(0xFF4A4A4A);
+
+  @Deprecated('No gradients in ChainGPT style')
+  static const LinearGradient cosmicGradient = LinearGradient(
+    colors: [Color(0xFFF5F5F5), Color(0xFFF5F5F5)],
+  );
+
+  @Deprecated('No gradients in ChainGPT style')
+  static const LinearGradient nebulaGradient = LinearGradient(
+    colors: [Color(0xFFF5F5F5), Color(0xFFF5F5F5)],
+  );
+
+  @Deprecated('No gradients in ChainGPT style')
+  static const LinearGradient auroraGradient = LinearGradient(
+    colors: [Color(0xFFF5F5F5), Color(0xFFF5F5F5)],
+  );
 
   // ========== Helper Methods ==========
 
@@ -136,8 +165,40 @@ class AppColors {
     return color.withValues(alpha: opacity);
   }
 
-  /// Get glassmorphism surface color
-  static Color getGlassSurface({double opacity = 0.1}) {
-    return const Color(0xFFFFFFFF).withValues(alpha: opacity);
+  /// Get minimal shadow (ChainGPT style - very subtle)
+  static List<BoxShadow> getMinimalShadow({
+    Color? color,
+    double opacity = 0.05,
+  }) {
+    return [
+      BoxShadow(
+        color: (color ?? const Color(0xFF000000)).withValues(alpha: opacity),
+        blurRadius: 4,
+        spreadRadius: 0,
+        offset: const Offset(0, 1),
+      ),
+    ];
+  }
+
+  /// Get angular card decoration (ChainGPT style)
+  static BoxDecoration getAngularCard({
+    Color? backgroundColor,
+    Color? borderColor,
+    double borderWidth = 1,
+    bool withShadow = true,
+  }) {
+    return BoxDecoration(
+      color: backgroundColor ?? cardSurface,
+      border: Border.all(
+        color: borderColor ?? borderPrimary,
+        width: borderWidth,
+      ),
+      boxShadow: withShadow ? getMinimalShadow() : null,
+    );
+  }
+
+  /// Get glass surface color (backwards compatibility)
+  static Color getGlassSurface({double opacity = 1.0}) {
+    return cardSurface.withValues(alpha: opacity);
   }
 }
