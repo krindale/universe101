@@ -7,6 +7,7 @@ import '../../domain/entities/celestial_body.dart';
 import '../widgets/cosmic_background.dart';
 import '../widgets/portfolio_card.dart';
 import 'planet_detail_screen.dart';
+import 'mercury_detail_screen.dart';
 
 class SolarSystemScreen extends StatelessWidget {
   const SolarSystemScreen({super.key});
@@ -127,12 +128,22 @@ class SolarSystemScreen extends StatelessWidget {
       ],
       accentColor: _getPlanetColor(planet.name),
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => PlanetDetailScreen(planet: planet),
-          ),
-        );
+        // Use MercuryDetailScreen for Mercury, default for others
+        if (planet.name == '수성 (Mercury)') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const MercuryDetailScreen(),
+            ),
+          );
+        } else {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PlanetDetailScreen(planet: planet),
+            ),
+          );
+        }
       },
     );
   }
