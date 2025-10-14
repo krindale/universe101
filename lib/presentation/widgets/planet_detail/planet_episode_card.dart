@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_colors_extended.dart';
 import '../../../core/theme/app_typography.dart';
 import 'common/planet_tag.dart';
 
