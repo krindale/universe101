@@ -2,7 +2,7 @@
   "master": {
     "tasks": [
       {
-        "id": "1",
+        "id": 1,
         "title": "Set up project dependencies and configuration",
         "description": "Configure Flutter project with required dependencies for 3D models, Firebase integration, and local storage",
         "details": "Add dependencies to pubspec.yaml: firebase_core, cloud_firestore, sqflite, shared_preferences, model_viewer_plus (for 3D models), cached_network_image. Update app configuration files and initialize Firebase. Clean up default Flutter template code and remove unused demo components.",
@@ -13,7 +13,7 @@
         "subtasks": []
       },
       {
-        "id": "2",
+        "id": 2,
         "title": "Create data models and local database structure",
         "description": "Implement comprehensive data models for planets, cosmic phenomena, and space exploration missions",
         "details": "Extend existing CelestialBody and Planet models. Create models for CosmicPhenomenon (eclipses, auroras, supernovas, etc.), SpaceExploration (missions, spacecraft, timeline events), and UserProgress. Implement SQLite database schema with tables for storing educational content, user favorites, and progress tracking. Create data access layer with CRUD operations.",
@@ -26,7 +26,7 @@
         "subtasks": []
       },
       {
-        "id": "3",
+        "id": 3,
         "title": "Implement solar system content and data",
         "description": "Create comprehensive solar system data including all planets, moons, and interesting episodes",
         "details": "Populate database with detailed information for Sun and 8 planets including: physical characteristics (diameter, distance, atmosphere composition), interesting episodes (Mars canal controversy, Saturn ring formation), exploration history, and high-quality low-poly 3D model references. Include major moons for gas giants. Implement data seeding functionality.",
@@ -39,7 +39,7 @@
         "subtasks": []
       },
       {
-        "id": "4",
+        "id": 4,
         "title": "Create cosmic phenomena content system",
         "description": "Implement content system for cosmic phenomena with historical context and storytelling",
         "details": "Create content for eclipses (solar/lunar), auroras, supernovas, black holes, gravitational lensing, meteor showers, nebulae, star formation, and comet orbital changes. Include historical stories (ancient eclipse fears, 1919 Einstein relativity proof). Implement content categorization and filtering. Add visual aids and animation descriptions for each phenomenon.",
@@ -52,7 +52,7 @@
         "subtasks": []
       },
       {
-        "id": "5",
+        "id": 5,
         "title": "Develop space exploration timeline and mission database",
         "description": "Create comprehensive space exploration history with missions, achievements, and timeline visualization",
         "details": "Implement content for major missions: Apollo 11, Voyager 1/2, Curiosity, Perseverance, James Webb Space Telescope, Artemis project. Create timeline visualization component with chronological ordering. Include mission objectives, key achievements, real exploration footage/images, and current status. Implement mission detail views with rich multimedia content.",
@@ -65,7 +65,7 @@
         "subtasks": []
       },
       {
-        "id": "6",
+        "id": 6,
         "title": "Implement navigation system and app structure",
         "description": "Create orbital-style navigation and card-based information display system",
         "details": "Enhance existing home screen with orbital navigation pattern. Implement bottom navigation or drawer with sections: Solar System, Cosmic Phenomena, Space Exploration, Favorites, Settings. Create card-based layouts for content display with smooth animations. Implement proper routing using named routes and navigation transitions that match the space theme.",
@@ -78,7 +78,7 @@
         "subtasks": []
       },
       {
-        "id": "7",
+        "id": 7,
         "title": "Build 3D planet viewer and interactive models",
         "description": "Implement 3D planet models with rotation, zoom, and interactive features",
         "details": "Integrate model_viewer_plus for 3D planet display. Create or source low-poly 3D models for all planets and major moons. Implement touch controls for rotation and zoom. Add information hotspots on 3D models that display facts when tapped. Ensure smooth 60fps performance and loading indicators for model assets.",
@@ -92,7 +92,7 @@
         "subtasks": []
       },
       {
-        "id": "8",
+        "id": 8,
         "title": "Implement learning cards system",
         "description": "Create interactive learning cards with progress tracking",
         "details": "Design and implement swipeable learning cards for quick facts and episodes. Implement user progress tracking to show completion status. Add card categories and filtering options. Include sharing functionality for interesting facts.",
@@ -168,7 +168,7 @@
         "updatedAt": "2025-10-11T21:57:00.584Z"
       },
       {
-        "id": "9",
+        "id": 9,
         "title": "Develop dark theme and visual design system",
         "description": "Enhance existing dark theme with cosmic color palette and animations",
         "details": "Expand existing AppTheme with complete dark/light theme implementation matching PRD colors (dark navy #0A0F2C, purple #6C63FF, orange #FFB347). Add cosmic-inspired animations, starfield backgrounds, and smooth transitions. Implement theme switching functionality. Create consistent visual hierarchy with proper typography scaling.",
@@ -181,7 +181,7 @@
         "subtasks": []
       },
       {
-        "id": "10",
+        "id": 10,
         "title": "Add notifications and settings functionality",
         "description": "Implement notification system for space events and user settings management",
         "status": "done",
@@ -226,7 +226,7 @@
         ]
       },
       {
-        "id": "11",
+        "id": 11,
         "title": "Implement advanced futuristic design system with ChainGPT Labs-inspired space-tech aesthetics",
         "description": "Redesign the entire app with a comprehensive futuristic space-tech design system featuring deep space purple/blue with cosmic orange/cyan accents, advanced particle effects, constellation patterns, angular UI components with glow effects, and immersive animations throughout all screens.",
         "details": "Build upon existing cosmic theme system to create ChainGPT Labs-inspired futuristic design: 1) Enhance color palette with deeper space purples (#2D1B4E, #1A0B2E), cosmic cyan (#00FFFF), and vibrant orange (#FF6B35) accents. 2) Implement advanced particle systems using CustomPainter for floating particles, constellation connections, and nebula effects in CosmicBackground widget. 3) Create angular glassmorphism components with hexagonal shapes, sharp edges, and subtle neon glow borders using BoxShadow with glow effects. 4) Add sophisticated animation library with page transitions, micro-interactions, and parallax scrolling using AnimationController and Tween animations. 5) Implement dynamic cosmic backgrounds with moving star fields, pulsing nebulae, and aurora-like effects. 6) Enhance typography with bold, futuristic fonts using Google Fonts (Orbitron, Exo 2) for headings and technical text. 7) Create consistent visual language with geometric patterns, holographic effects, and space-tech inspired iconography. 8) Add smooth transitions between screens with fade, slide, and scale effects. 9) Implement hover/press states with glow animations and ripple effects. 10) Create immersive loading states with particle animations and progress indicators. Update all existing screens (SolarSystemScreen, PhenomenaScreen, ExplorationScreen, LearningCardsScreen, SettingsScreen) to use new design system components.",
@@ -307,7 +307,7 @@
         "updatedAt": "2025-10-11T22:03:08.317Z"
       },
       {
-        "id": "12",
+        "id": 12,
         "title": "Refactor MercuryDetailScreen to reusable PlanetDetailScreen component",
         "description": "Transform hardcoded MercuryDetailScreen into a generic, reusable PlanetDetailScreen that accepts any planet data as constructor parameter and follows SOLID principles by extracting large widget components.",
         "details": "This refactoring task involves multiple architectural improvements to create a maintainable and reusable component:\n\n**1. Constructor Parameter Refactoring:**\n- Change `MercuryDetailScreen` constructor to accept `Planet planet` parameter\n- Remove hardcoded `SolarSystemData.getAllPlanets().first` on line 42 and line 109\n- Pass planet data through constructor to eliminate tight coupling\n\n**2. Class Renaming:**\n- Rename `MercuryDetailScreen` to `PlanetDetailScreen` for generic usage\n- Update corresponding state class `_MercuryDetailScreenState` to `_PlanetDetailScreenState`\n- Ensure all references maintain consistency\n\n**3. Navigation Updates:**\n- Update `solar_system_screen.dart` lines 132-138 to use new generic `PlanetDetailScreen(planet: planet)` for Mercury\n- Remove special case handling that differentiated Mercury from other planets\n- Ensure consistent navigation pattern across all planets\n\n**4. SOLID Principles Implementation:**\n- **Single Responsibility**: Extract large widget methods into separate component classes:\n  - Create `PlanetOverviewCard` component from `_buildOverviewCard` method (lines 195-283)\n  - Create `PlanetDescriptionCard` component from `_buildDescriptionCard` method (lines 409-504)\n  - Create `PlanetFactCard` component from `_buildFactCard` method (lines 507-596)\n  - Create `PlanetEpisodeCard` component from `_buildEpisodeCard` method (lines 599-704)\n  - Create `PlanetMetricsGrid` component from `_buildMetricsGrid` method (lines 287-360)\n- **Open/Closed**: Design components to be extensible for future planet-specific customizations\n- **Dependency Inversion**: Components should depend on Planet abstraction, not concrete implementations\n\n**5. Component Architecture:**\n- Create separate files in `lib/presentation/widgets/planet_detail/` directory:\n  - `planet_overview_card.dart`\n  - `planet_description_card.dart`\n  - `planet_fact_card.dart`\n  - `planet_episode_card.dart`\n  - `planet_metrics_grid.dart`\n- Each component should accept necessary Planet data as constructor parameters\n- Maintain existing ChainGPT Labs design system styling and cosmic theme consistency\n\n**6. Backwards Compatibility:**\n- Ensure existing navigation from solar system screen continues to work\n- Maintain all current functionality including page indicators, horizontal paging, and styling\n- Preserve ChainGPT design system colors, typography, and layout patterns",
@@ -375,7 +375,7 @@
             "dependencies": [
               4
             ],
-            "details": "Rename class from MercuryDetailScreen to PlanetDetailScreen and _MercuryDetailScreenState to _PlanetDetailScreenState, modify constructor to accept required Planet planet parameter, remove hardcoded SolarSystemData.getAllPlanets().first calls on lines 42 and 109, replace all _build* method calls with corresponding component widgets (PlanetOverviewCard, PlanetDescriptionCard, etc.), update solar_system_screen.dart navigation (lines 132-138) to pass planet parameter to PlanetDetailScreen constructor, and ensure file is renamed to planet_detail_screen.dart.\n<info added on 2025-10-14T01:46:45.468Z>\nI need to analyze the codebase to understand the current implementation and provide a comprehensive update for this subtask.Implementation Complete - Task 12.5 successfully transformed the monolithic MercuryDetailScreen into a clean, reusable PlanetDetailScreenChainGPT following SOLID principles. The refactoring achieved significant code reduction from 752 lines to 206 lines (73% reduction) while maintaining full functionality and design system consistency. All extracted components (PlanetOverviewCard, PlanetDescriptionCard, PlanetFactCard, PlanetEpisodeCard, plus 4 common helper widgets) are now properly integrated and working. Navigation has been updated to pass planet parameters correctly, and the solution compiled without errors. The generic screen can now handle any planet data, making it truly reusable across the entire solar system. Next phase should focus on extending this reusable pattern to all planets by updating the navigation logic to use PlanetDetailScreenChainGPT for all planets, not just Mercury.\n</info added on 2025-10-14T01:46:45.468Z>",
+            "details": "Rename class from MercuryDetailScreen to PlanetDetailScreen and _MercuryDetailScreenState to _PlanetDetailScreenState, modify constructor to accept required Planet planet parameter, remove hardcoded SolarSystemData.getAllPlanets().first calls on lines 42 and 109, replace all _build* method calls with corresponding component widgets (PlanetOverviewCard, PlanetDescriptionCard, etc.), update solar_system_screen.dart navigation (lines 132-138) to pass planet parameter to PlanetDetailScreen constructor, and ensure file is renamed to planet_detail_screen.dart.\n<info added on 2025-10-14T01:46:45.468Z>\nI need to analyze the codebase to understand the current implementation and provide a comprehensive update for this subtask.Implementation Complete - Task 12.5 successfully transformed the monolithic MercuryDetailScreen into a clean, reusable PlanetDetailScreen following SOLID principles. The refactoring achieved significant code reduction from 752 lines to 206 lines (73% reduction) while maintaining full functionality and design system consistency. All extracted components (PlanetOverviewCard, PlanetDescriptionCard, PlanetFactCard, PlanetEpisodeCard, plus 4 common helper widgets) are now properly integrated and working. Navigation has been updated to pass planet parameters correctly, and the solution compiled without errors. The generic screen can now handle any planet data, making it truly reusable across the entire solar system. Next phase should focus on extending this reusable pattern to all planets by updating the navigation logic to use PlanetDetailScreen for all planets, not just Mercury.\n</info added on 2025-10-14T01:46:45.468Z>",
             "status": "done",
             "testStrategy": "Integration tests to verify PlanetDetailScreen works with any Planet data, navigation tests to confirm solar system screen properly passes planet data, regression tests to ensure all functionality is preserved after refactoring",
             "parentId": "undefined",
@@ -385,20 +385,7 @@
         "updatedAt": "2025-10-14T01:47:02.521Z"
       },
       {
-        "id": "13",
-        "title": "Extract widgets from planet detail screen into reusable components following SOLID principles",
-        "description": "Refactor the large mercury_detail_screen.dart file by extracting its component widgets into separate reusable widget files in lib/presentation/widgets/ folder, following single responsibility principle and reducing code coupling.",
-        "details": "This refactoring task involves extracting large widget components from mercury_detail_screen.dart (753 lines) into separate, reusable widget files following SOLID principles:\n\n**1. Create Widget Directory Structure:**\n- Ensure lib/presentation/widgets/ directory exists\n- Create individual files for each extracted component\n\n**2. Extract PlanetOverviewCard (_buildOverviewCard method, lines 195-284):**\n- Create lib/presentation/widgets/planet_overview_card.dart\n- Extract the overview display logic including planet icon, name, tag, and metrics grid\n- Accept Planet object and optional styling parameters as constructor arguments\n- Maintain existing ChainGPT Labs design system (AppColors, AppTypography, AppColorsExtended)\n\n**3. Extract PlanetDescriptionCard (_buildDescriptionCard method, lines 409-504):**\n- Create lib/presentation/widgets/planet_description_card.dart\n- Extract description display logic with icon, title, content, and info rows\n- Accept Planet object and display configuration as parameters\n- Preserve scrollable content and styling consistency\n\n**4. Extract PlanetFactCard (_buildFactCard method, lines 507-596):**\n- Create lib/presentation/widgets/planet_fact_card.dart\n- Extract fact display logic with icon, title, and content\n- Accept fact title and content as constructor parameters\n- Maintain consistent card styling and layout\n\n**5. Extract PlanetEpisodeCard (_buildEpisodeCard method, lines 599-704):**\n- Create lib/presentation/widgets/planet_episode_card.dart\n- Extract episode display with episode number badge, title parsing, and content\n- Accept episode string and index as parameters\n- Preserve episode parsing logic (title: content format)\n\n**6. Extract PlanetMetricsGrid (_buildMetricsGrid method, lines 287-360):**\n- Create lib/presentation/widgets/planet_metrics_grid.dart\n- Extract the 2x3 metrics grid layout logic\n- Follow existing PortfolioCard pattern for metric cells\n- Accept Planet object and return grid widget with borders and styling\n\n**7. Extract PageIndicatorWidget (_buildPageIndicator method, lines 108-170):**\n- Create lib/presentation/widgets/page_indicator_widget.dart\n- Extract page navigation indicator with section labels and progress dots\n- Accept current page, total pages, facts count, and episodes count as parameters\n- Maintain section detection logic (Overview, Facts, Episodes)\n\n**8. Implementation Guidelines:**\n- Each widget should be self-contained with clear constructor parameters\n- Import required theme files (app_colors.dart, app_typography.dart, app_colors_extended.dart)\n- Follow existing naming conventions and code style\n- Maintain all existing functionality and visual appearance\n- Use const constructors where possible for performance\n- Include proper documentation comments for each widget class\n\n**9. Update mercury_detail_screen.dart:**\n- Import all newly created widget files\n- Replace method calls with widget instantiations\n- Pass appropriate parameters to each extracted widget\n- Maintain existing PageView.builder structure and page routing logic\n- Preserve existing state management and PageController functionality\n\n**10. Helper Methods:**\n- Move shared helper methods (_buildTag, _buildInfoRow, _formatNumber, _buildMetricCell) to appropriate widget files\n- Consider creating a shared utilities file if methods are used across multiple widgets",
-        "testStrategy": "**Unit Testing Strategy:**\n1. **Widget Extraction Verification**: Test each extracted widget renders correctly in isolation with proper Planet data parameters\n2. **Visual Consistency Tests**: Verify extracted widgets maintain identical visual appearance and styling as original implementation\n3. **Constructor Parameter Tests**: Validate each widget properly accepts and uses constructor parameters (Planet objects, styling options, content strings)\n4. **Responsive Layout Tests**: Test widget layouts across different screen sizes and orientations\n5. **Integration Tests**: Verify mercury_detail_screen.dart correctly imports and uses all extracted widgets\n6. **Page Navigation Tests**: Test PageView.builder still functions correctly with extracted widgets\n7. **State Management Tests**: Verify PageController and page indicator still work properly after refactoring\n8. **Theme Integration Tests**: Test widgets properly apply ChainGPT Labs design system colors and typography\n9. **Performance Tests**: Measure and compare rendering performance before and after extraction\n10. **Code Quality Tests**: Verify extracted widgets follow SOLID principles with single responsibilities and proper encapsulation\n11. **Reusability Tests**: Test extracted widgets can be used in other screens with different Planet data\n12. **Memory Usage Tests**: Verify const constructors and proper widget disposal prevent memory leaks",
-        "status": "pending",
-        "dependencies": [
-          "12"
-        ],
-        "priority": "high",
-        "subtasks": []
-      },
-      {
-        "id": "14",
+        "id": 14,
         "title": "Enrich planet data with comprehensive facts and episodes for all solar system planets",
         "description": "Expand the solar_system_data.dart file to include detailed facts (10-15 per planet) and historical episodes (10-15 per planet) for Venus, Earth, Mars, Jupiter, Saturn, Uranus, and Neptune, matching Mercury's comprehensive data structure and educational quality.",
         "details": "**Analysis of Current State:**\nThe solar_system_data.dart file currently contains comprehensive data for Mercury with 14 detailed facts and 15 historical episodes, while other planets (Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune) have minimal data with only 4-5 basic facts and 4-5 simple episodes each.\n\n**Implementation Requirements:**\n\n1. **Fact Enhancement for Each Planet (10-15 facts per planet):**\n   - **Venus**: Add facts about extreme greenhouse effect, sulfuric acid clouds, retrograde rotation mystery, Soviet Venera missions, surface pressure equivalent to 900m underwater, volcanic resurfacing, longest day in solar system, phase cycle observations, radar mapping through clouds, potential phosphine discovery\n   - **Earth**: Add facts about magnetic field protection, plate tectonics, water cycle uniqueness, biodiversity, atmospheric composition evolution, Moon's tidal influence, geological time scale, climate zones, oxygen catastrophe, Goldilocks zone positioning\n   - **Mars**: Add facts about polar ice caps, Olympus Mons details, Valles Marineris canyon, dust storms, thin atmosphere effects, seasonal changes, methane mysteries, past magnetic field, terraforming possibilities, current rover discoveries\n   - **Jupiter**: Add facts about Great Red Spot dynamics, radiation belts, comet impact protection theory, metallic hydrogen core, auroras, radio emissions, Galilean moons details, ring system, fastest rotation, atmospheric bands\n   - **Saturn**: Add facts about hexagonal storm, shepherd moons, ring composition and age, Titan's methane cycle, Enceladus geysers, magnetic field anomalies, seasonal changes, Cassini Grand Finale, density comparison to water\n   - **Uranus**: Add facts about extreme axial tilt effects, ice composition, ring discovery, magnetic field offset, extreme seasons (42-year day/night), methane atmosphere, temperature variations, collision theory, unique rotation, faint rings\n   - **Neptune**: Add facts about strongest winds, internal heat source, magnetic field tilt, Triton's retrograde orbit, Great Dark Spot disappearance, mathematical discovery story, deep blue color, extreme weather, density and composition, distant orbit effects\n\n2. **Episode Enhancement for Each Planet (10-15 episodes per planet):**\n   - Follow Mercury's narrative style with engaging Korean descriptions\n   - Include historical observations, mythological origins, scientific discoveries, space missions, cultural significance, and future exploration plans\n   - Maintain educational value while being entertaining and accessible\n\n3. **Data Structure Consistency:**\n   - Use the same Map<String, String> format for facts as Mercury\n   - Use the same List<String> format for episodes as Mercury\n   - Ensure Korean language consistency and educational tone\n   - Maintain accurate scientific data in diameter, distance, orbital period, rotation period, mass, and gravity fields\n\n4. **Quality Standards:**\n   - Each fact should be 2-4 sentences with specific details and comparisons\n   - Each episode should be 3-5 sentences with historical context and engaging narrative\n   - Include specific numbers, dates, and scientific measurements where appropriate\n   - Ensure cultural sensitivity and educational appropriateness for Korean audiences\n\n5. **Technical Implementation:**\n   - Modify the static Planet objects (_venus, _earth, _mars, _jupiter, _saturn, _uranus, _neptune) in solar_system_data.dart\n   - Replace existing minimal facts and episodes with comprehensive content\n   - Ensure no breaking changes to the Planet class structure or constructor parameters\n   - Maintain existing scientific accuracy for numerical data fields",
@@ -411,7 +398,7 @@
         "subtasks": []
       },
       {
-        "id": "15",
+        "id": 15,
         "title": "Integrate planet images from assets/solar_system/ folder",
         "description": "Replace icon widgets with actual planet images from the assets/solar_system/ folder in both the main solar system screen and planet detail screens, including proper asset management and error handling.",
         "details": "**Current State Analysis:**\n\nThe project currently has planet image assets available in assets/solar_system/ folder (mercury_00001_.png, venus_00001_.png, earth_00001_.png, mars_00001_.png, jupiter_00001_.png, saturn_00001_.png, uranus_00001_.png, neptune_00001_.png) but these are not being used in the UI. Instead, Icon widgets with Icons.public are displayed in planet cards (line 94-98 in solar_system_screen.dart).\n\n**Implementation Tasks:**\n\n1. **Update pubspec.yaml Assets Configuration:**\n   - Add assets/solar_system/ directory to the assets section in pubspec.yaml (currently commented out on lines 93-95)\n   - Ensure proper asset path structure for Flutter asset loading\n\n2. **Create Planet Image Helper Function:**\n   - Create utility function to map planet names to corresponding image asset paths\n   - Handle name localization (e.g., '수성 (Mercury)' → 'mercury_00001_.png')\n   - Implement fallback mechanism for missing images\n\n3. **Replace Icons in SolarSystemScreen:**\n   - Replace the Icon widget in _buildPlanetCard method (lines 94-98) with Image.asset\n   - Maintain the 80x80 size and circular decoration\n   - Add BoxFit.cover for proper image scaling within circular container\n\n4. **Replace Icons in Planet Detail Screens:**\n   - Update mercury_detail_screen.dart overview cards to use planet images\n   - Update the generic planet_detail_screen.dart to use planet images\n   - Maintain consistent sizing and styling across both screens\n\n5. **Implement Image Loading and Error Handling:**\n   - Add loading indicators using CircularProgressIndicator during image load\n   - Implement error handling with fallback to original Icons.public for failed loads\n   - Use Image.asset with errorBuilder parameter for graceful error handling\n   - Consider using cached_network_image package (already in dependencies) for optimization if needed\n\n6. **Performance Optimization:**\n   - Implement proper image caching strategy\n   - Use appropriate image resolution and compression\n   - Add image preloading for smooth user experience\n   - Consider using AssetImage with ImageProvider for better memory management\n\n**Technical Implementation Details:**\n\n```dart\n// Helper function for planet image mapping\nString _getPlanetImageAsset(String planetName) {\n  final planetKey = planetName.toLowerCase();\n  if (planetKey.contains('mercury')) return 'assets/solar_system/mercury_00001_.png';\n  if (planetKey.contains('venus')) return 'assets/solar_system/venus_00001_.png';\n  // ... continue for all planets\n  return 'assets/solar_system/mercury_00001_.png'; // fallback\n}\n\n// Replace Icon widget with Image.asset\nContainer(\n  width: 80,\n  height: 80,\n  decoration: BoxDecoration(\n    shape: BoxShape.circle,\n    border: Border.all(color: _getPlanetColor(planet.name), width: 2),\n  ),\n  child: ClipOval(\n    child: Image.asset(\n      _getPlanetImageAsset(planet.name),\n      width: 80,\n      height: 80,\n      fit: BoxFit.cover,\n      errorBuilder: (context, error, stackTrace) {\n        return Icon(\n          Icons.public,\n          size: 40,\n          color: Colors.white.withOpacity(0.9),\n        );\n      },\n    ),\n  ),\n),\n```",
@@ -426,12 +413,14 @@
     ],
     "metadata": {
       "version": "1.0.0",
-      "lastModified": "2025-10-14T01:47:02.523Z",
+      "lastModified": "2025-10-14T08:04:24.193Z",
       "taskCount": 15,
       "completedCount": 11,
       "tags": [
         "master"
-      ]
+      ],
+      "created": "2025-10-14T14:29:11.973Z",
+      "description": "Tasks for master context"
     }
   }
 }

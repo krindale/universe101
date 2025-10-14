@@ -6,8 +6,8 @@ import '../../domain/repositories/planet_repository.dart';
 import '../../domain/entities/celestial_body.dart';
 import '../widgets/cosmic_background.dart';
 import '../widgets/portfolio_card.dart';
+import '../../data/datasources/solar_system_data.dart';
 import 'planet_detail_screen.dart';
-import 'planet_detail_screen_chaingpt.dart';
 
 class SolarSystemScreen extends StatelessWidget {
   const SolarSystemScreen({super.key});
@@ -64,7 +64,15 @@ class SolarSystemScreen extends StatelessWidget {
                       itemCount: planets.length,
                       itemBuilder: (context, index) {
                         final planet = planets[index];
-                        return Center(child: _buildPlanetCard(context, planet));
+                        final planetDetail =
+                            SolarSystemData.getAllPlanets()[index];
+                        return Center(
+                          child: _buildPlanetCard(
+                            context,
+                            planet,
+                            planetDetail,
+                          ),
+                        );
                       },
                     );
                   },
@@ -79,7 +87,11 @@ class SolarSystemScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildPlanetCard(BuildContext context, Planet planet) {
+  Widget _buildPlanetCard(
+    BuildContext context,
+    Planet planet,
+    Planet planetDetail,
+  ) {
     return PortfolioCard(
       tag: _getPlanetType(planet.name),
       icon: Container(
@@ -112,21 +124,12 @@ class SolarSystemScreen extends StatelessWidget {
       accentColor: _getPlanetColor(planet.name),
       onTap: () {
         // Use ChainGPT design for Mercury, default for others
-        // if (planet.name == '수성 (Mercury)') {
-        //   Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (context) => PlanetDetailScreenChainGPT(planet: planet),
-        //     ),
-        //   );
-        // } else {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => PlanetDetailScreenChainGPT(planet: planet),
+            builder: (context) => PlanetDetailScreen(planet: planetDetail),
           ),
         );
-        // }
       },
     );
   }

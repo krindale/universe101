@@ -1,402 +1,201 @@
 import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_colors_extended.dart';
 import '../../core/theme/app_typography.dart';
-import '../../core/theme/app_spacing.dart';
 import '../../domain/entities/celestial_body.dart';
-import '../widgets/cosmic_background.dart';
-import '../widgets/glass_card.dart';
-import '../widgets/planet_3d_viewer.dart';
+import '../widgets/planet_detail/planet_overview_card.dart';
+import '../widgets/planet_detail/planet_description_card.dart';
+import '../widgets/planet_detail/planet_fact_card.dart';
+import '../widgets/planet_detail/planet_episode_card.dart';
 
+/// Generic planet detail screen with horizontal paging
+/// Reusable for all planets - follows SOLID principles
+/// Matches ChainGPT Labs design system
 class PlanetDetailScreen extends StatefulWidget {
   final Planet planet;
 
-  const PlanetDetailScreen({
-    super.key,
-    required this.planet,
-  });
+  const PlanetDetailScreen({super.key, required this.planet});
 
   @override
   State<PlanetDetailScreen> createState() => _PlanetDetailScreenState();
 }
 
-class _PlanetDetailScreenState extends State<PlanetDetailScreen>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
+class _PlanetDetailScreenState extends State<PlanetDetailScreen> {
+  final PageController _pageController = PageController();
+  int _currentPage = 0;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _pageController.addListener(() {
+      final page = _pageController.page?.round() ?? 0;
+      if (page != _currentPage) {
+        setState(() {
+          _currentPage = page;
+        });
+      }
+    });
   }
 
   @override
   void dispose() {
-    _tabController.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final totalPages =
+        2 + widget.planet.facts.length + widget.planet.episodes.length;
+
     return Scaffold(
-      body: CosmicBackground(
-        animated: true,
-        child: CustomScrollView(
-          slivers: [
-            // App Bar with 3D Model
-            _buildAppBar(context),
-
-            // Tab Bar
-            _buildTabBar(),
-
-            // Tab Content
-            _buildTabContent(),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildAppBar(BuildContext context) {
-    return SliverAppBar(
-      expandedHeight: 400,
-      pinned: true,
-      backgroundColor: AppColors.deepSpace,
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
-        onPressed: () => Navigator.pop(context),
-      ),
-      flexibleSpace: FlexibleSpaceBar(
-        title: Text(
-          widget.planet.name,
-          style: AppTypography.headlineMedium.copyWith(
-            color: AppColors.textPrimary,
-            shadows: [
-              Shadow(
-                color: AppColors.deepSpace.withValues(alpha: 0.8),
-                blurRadius: 10,
-              ),
-            ],
-          ),
-        ),
-        background: Stack(
-          fit: StackFit.expand,
+      backgroundColor: AppColors.background,
+      body: SafeArea(
+        child: Stack(
           children: [
-            // Gradient Background
-            Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    AppColors.cosmicBlue,
-                    AppColors.deepSpace,
-                  ],
-                ),
-              ),
+            // Main paging content
+            PageView.builder(
+              controller: _pageController,
+              itemCount: totalPages,
+              itemBuilder: (context, index) {
+                return _buildPage(index);
+              },
             ),
 
-            // 3D Model Viewer
-            if (widget.planet.modelUrl != null)
-              Padding(
-                padding: const EdgeInsets.only(top: 60),
-                child: Planet3DViewer(
-                  modelUrl: widget.planet.modelUrl!,
-                  planetName: widget.planet.name,
-                  height: 340,
-                  backgroundColor: Colors.transparent,
+            // Top overlay with back button and page indicator
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 16,
                 ),
-              )
-            else
-              // Fallback icon if no 3D model
-              Center(
-                child: Icon(
-                  Icons.public,
-                  size: 120,
-                  color: AppColors.textPrimary.withValues(alpha: 0.3),
-                ),
-              ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTabBar() {
-    return SliverPersistentHeader(
-      pinned: true,
-      delegate: _SliverTabBarDelegate(
-        TabBar(
-          controller: _tabController,
-          indicatorColor: AppColors.stardustGold,
-          labelColor: AppColors.stardustGold,
-          unselectedLabelColor: AppColors.textSecondary,
-          labelStyle: AppTypography.titleSmall,
-          tabs: const [
-            Tab(text: '정보'),
-            Tab(text: '사실'),
-            Tab(text: '에피소드'),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTabContent() {
-    return SliverFillRemaining(
-      child: TabBarView(
-        controller: _tabController,
-        children: [
-          _buildInfoTab(),
-          _buildFactsTab(),
-          _buildEpisodesTab(),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildInfoTab() {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(AppSpacing.paddingMD),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Description
-          GlassCard(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('설명', style: AppTypography.titleMedium),
-                const SizedBox(height: AppSpacing.sm),
-                Text(
-                  widget.planet.description,
-                  style: AppTypography.bodyMedium.copyWith(
-                    color: AppColors.textSecondary,
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          const SizedBox(height: AppSpacing.md),
-
-          // Physical Characteristics
-          GlassCard(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('물리적 특성', style: AppTypography.titleMedium),
-                const SizedBox(height: AppSpacing.md),
-                _buildInfoRow('지름', '${_formatNumber(widget.planet.diameter)} km'),
-                _buildInfoRow('태양으로부터의 거리', '${widget.planet.distanceFromSun} AU'),
-                _buildInfoRow('공전 주기', '${_formatNumber(widget.planet.orbitalPeriod)} 일'),
-                _buildInfoRow('자전 주기', '${_formatNumber(widget.planet.rotationPeriod)} 시간'),
-                _buildInfoRow('질량', '${widget.planet.mass} 지구 질량'),
-                _buildInfoRow('중력', '${widget.planet.gravity} m/s²'),
-                _buildInfoRow('구성', widget.planet.composition),
-                _buildInfoRow('고리 유무', widget.planet.hasRings ? '있음' : '없음'),
-                if (widget.planet.moons.isNotEmpty)
-                  _buildInfoRow('위성 수', '${widget.planet.moons.length}개'),
-              ],
-            ),
-          ),
-
-          const SizedBox(height: AppSpacing.md),
-
-          // Moons
-          if (widget.planet.moons.isNotEmpty)
-            GlassCard(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('주요 위성', style: AppTypography.titleMedium),
-                  const SizedBox(height: AppSpacing.sm),
-                  Wrap(
-                    spacing: AppSpacing.sm,
-                    runSpacing: AppSpacing.sm,
-                    children: widget.planet.moons.map((moon) {
-                      return Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: AppSpacing.paddingMD,
-                          vertical: AppSpacing.paddingSM,
-                        ),
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              AppColors.nebulaPurple.withValues(alpha: 0.3),
-                              AppColors.cosmicBlue.withValues(alpha: 0.3),
-                            ],
-                          ),
-                          borderRadius: BorderRadius.circular(AppSpacing.radiusSM),
-                          border: Border.all(
-                            color: AppColors.nebulaPurple.withValues(alpha: 0.5),
-                          ),
-                        ),
-                        child: Text(
-                          moon,
-                          style: AppTypography.bodySmall,
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                ],
-              ),
-            ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildFactsTab() {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(AppSpacing.paddingMD),
-      child: Column(
-        children: widget.planet.facts.entries.map((entry) {
-          return GlassCard(
-            margin: const EdgeInsets.only(bottom: AppSpacing.marginMD),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Icon(
-                      Icons.lightbulb_outline,
-                      color: AppColors.stardustGold,
-                      size: 20,
-                    ),
-                    const SizedBox(width: AppSpacing.sm),
-                    Expanded(
-                      child: Text(
-                        entry.key,
-                        style: AppTypography.titleSmall.copyWith(
-                          color: AppColors.stardustGold,
+                    // Back button
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: Container(
+                        width: 36,
+                        height: 36,
+                        decoration: BoxDecoration(
+                          color: AppColors.cardSurface,
+                          border: Border.all(
+                            color: AppColors.borderPrimary,
+                            width: 1,
+                          ),
+                        ),
+                        child: const Icon(
+                          Icons.arrow_back,
+                          color: AppColors.textPrimary,
+                          size: 18,
                         ),
                       ),
                     ),
+
+                    // Page indicator with section label
+                    _buildPageIndicator(totalPages),
+
+                    // Spacer to balance back button
+                    const SizedBox(width: 36),
                   ],
                 ),
-                const SizedBox(height: AppSpacing.sm),
-                Text(
-                  entry.value,
-                  style: AppTypography.bodyMedium.copyWith(
-                    color: AppColors.textSecondary,
-                  ),
-                ),
-              ],
-            ),
-          );
-        }).toList(),
-      ),
-    );
-  }
-
-  Widget _buildEpisodesTab() {
-    return SingleChildScrollView(
-      padding: const EdgeInsets.all(AppSpacing.paddingMD),
-      child: Column(
-        children: widget.planet.episodes.asMap().entries.map((entry) {
-          final index = entry.key;
-          final episode = entry.value;
-          return GlassCard(
-            margin: const EdgeInsets.only(bottom: AppSpacing.marginMD),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      colors: [AppColors.nebulaPurple, AppColors.cosmicBlue],
-                    ),
-                    borderRadius: BorderRadius.circular(AppSpacing.radiusSM),
-                  ),
-                  child: Center(
-                    child: Text(
-                      '${index + 1}',
-                      style: AppTypography.titleMedium.copyWith(
-                        color: AppColors.textPrimary,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: AppSpacing.md),
-                Expanded(
-                  child: Text(
-                    episode,
-                    style: AppTypography.bodyMedium.copyWith(
-                      color: AppColors.textSecondary,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        }).toList(),
-      ),
-    );
-  }
-
-  Widget _buildInfoRow(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: AppSpacing.sm),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 120,
-            child: Text(
-              label,
-              style: AppTypography.bodySmall.copyWith(
-                color: AppColors.textSecondary,
               ),
             ),
-          ),
-          const SizedBox(width: AppSpacing.md),
-          Expanded(
-            child: Text(
-              value,
-              style: AppTypography.bodyMedium.copyWith(
-                color: AppColors.stardustGold,
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
-  String _formatNumber(double number) {
-    if (number >= 1000000) {
-      return '${(number / 1000000).toStringAsFixed(2)}M';
-    } else if (number >= 1000) {
-      return '${(number / 1000).toStringAsFixed(2)}K';
+  Widget _buildPageIndicator(int totalPages) {
+    final factsCount = widget.planet.facts.length;
+
+    // Determine current section and pages in that section
+    String sectionLabel;
+    int sectionStart;
+    int sectionEnd;
+
+    if (_currentPage < 2) {
+      // Overview section (pages 0-1)
+      sectionLabel = 'Overview';
+      sectionStart = 0;
+      sectionEnd = 2;
+    } else if (_currentPage < 2 + factsCount) {
+      // Facts section (dynamic based on facts count)
+      sectionLabel = 'Facts';
+      sectionStart = 2;
+      sectionEnd = 2 + factsCount;
+    } else {
+      // Episodes section (remaining pages)
+      sectionLabel = 'Episodes';
+      sectionStart = 2 + factsCount;
+      sectionEnd = totalPages;
     }
-    return number.toStringAsFixed(2);
-  }
-}
 
-// Custom SliverPersistentHeaderDelegate for TabBar
-class _SliverTabBarDelegate extends SliverPersistentHeaderDelegate {
-  final TabBar tabBar;
+    final sectionPages = sectionEnd - sectionStart;
+    final currentInSection = _currentPage - sectionStart;
 
-  _SliverTabBarDelegate(this.tabBar);
-
-  @override
-  double get minExtent => tabBar.preferredSize.height;
-
-  @override
-  double get maxExtent => tabBar.preferredSize.height;
-
-  @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return Container(
-      color: AppColors.deepSpace,
-      child: tabBar,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Section label
+        Text(
+          sectionLabel,
+          style: AppTypography.labelSmall.copyWith(
+            color: AppColorsExtended.neutralGray,
+            fontSize: 9,
+            letterSpacing: 0.5,
+          ),
+        ),
+        const SizedBox(height: 4),
+        // Section progress dots (show all dots, no limit)
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: List.generate(sectionPages, (index) {
+            final isActive = currentInSection == index;
+            return Container(
+              margin: const EdgeInsets.symmetric(horizontal: 2),
+              width: isActive ? 16 : 4,
+              height: 4,
+              decoration: BoxDecoration(
+                color: isActive
+                    ? AppColorsExtended.chainGPTOrange
+                    : AppColorsExtended.neutralGray.withValues(alpha: 0.3),
+                borderRadius: BorderRadius.circular(2),
+              ),
+            );
+          }),
+        ),
+      ],
     );
   }
 
-  @override
-  bool shouldRebuild(_SliverTabBarDelegate oldDelegate) {
-    return false;
+  Widget _buildPage(int index) {
+    // Page 0: Overview
+    if (index == 0) {
+      return PlanetOverviewCard(planet: widget.planet);
+    }
+    // Page 1: Description
+    else if (index == 1) {
+      return PlanetDescriptionCard(planet: widget.planet);
+    }
+    // Facts pages (dynamic count)
+    else if (index < 2 + widget.planet.facts.length) {
+      final factIndex = index - 2;
+      final factEntry = widget.planet.facts.entries.elementAt(factIndex);
+      return PlanetFactCard(title: factEntry.key, content: factEntry.value);
+    }
+    // Episodes pages (remaining)
+    else {
+      final episodeIndex = index - 2 - widget.planet.facts.length;
+      return PlanetEpisodeCard(
+        episode: widget.planet.episodes[episodeIndex],
+        index: episodeIndex,
+      );
+    }
   }
 }

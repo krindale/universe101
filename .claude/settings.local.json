@@ -20,7 +20,11 @@
       "Bash(./adb.exe shell input tap:*)",
       "Bash(./adb.exe shell input keyevent 4)",
       "Bash(./adb.exe shell am start -n com.example.universe101/.MainActivity)",
-      "Bash(git log:*)"
+      "Bash(git log:*)",
+      "Bash(./adb.exe shell input swipe:*)",
+      "Bash(C:Userswow32AppDataLocalAndroidSdkplatform-toolsadb.exe shell am start -n com.example.universe101/.MainActivity)",
+      "Bash(git checkout:*)",
+      "Bash(git rm:*)"
     ],
     "deny": [],
     "ask": []

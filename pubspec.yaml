@@ -45,9 +45,6 @@ dependencies:
   path_provider: ^2.1.5
   path: ^1.9.0
 
-  # 3D models
-  model_viewer_plus: ^1.8.0
-
   # Image handling
   cached_network_image: ^3.4.1
 
