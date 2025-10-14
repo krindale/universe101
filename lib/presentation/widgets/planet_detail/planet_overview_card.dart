@@ -83,7 +83,7 @@ class PlanetOverviewCard extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 24),
 
                   // Planet subtitle
                   Text(
@@ -134,21 +134,21 @@ class PlanetOverviewCard extends StatelessWidget {
   String _getPlanetSubtitle(String name) {
     switch (name) {
       case '수성 (Mercury)':
-        return '태양에 가장 가까운 행성';
+        return '태양에 가장 가까운 작은 행성, 극심한 온도 변화';
       case '금성 (Venus)':
-        return '가장 뜨거운 행성';
+        return '태양계에서 가장 뜨거운 지옥 같은 행성';
       case '지구 (Earth)':
-        return '우리의 고향';
+        return '생명이 살아 숨 쉬는 우주의 푸른 오아시스';
       case '화성 (Mars)':
-        return '붉은 행성';
+        return '붉은 사막의 행성, 인류의 다음 목적지';
       case '목성 (Jupiter)':
-        return '가장 큰 행성';
+        return '태양계의 거대한 왕, 강력한 폭풍의 세계';
       case '토성 (Saturn)':
-        return '아름다운 고리';
+        return '아름다운 고리를 가진 태양계의 보석';
       case '천왕성 (Uranus)':
-        return '옆으로 누운 행성';
+        return '옆으로 누워 도는 신비로운 얼음 거인';
       case '해왕성 (Neptune)':
-        return '가장 먼 행성';
+        return '태양계 가장 먼 곳의 푸른 얼음 행성';
       default:
         return '';
     }
