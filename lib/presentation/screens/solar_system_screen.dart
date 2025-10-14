@@ -101,7 +101,7 @@ class SolarSystemScreen extends StatelessWidget {
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              color: _getPlanetColor(planet.name).withValues(alpha: 0.5),
+              color: _getPlanetColor(planet.name).withValues(alpha: 0.3),
               blurRadius: 20,
               spreadRadius: 5,
             ),
@@ -112,12 +112,11 @@ class SolarSystemScreen extends StatelessWidget {
             planetDetail.imageUrl,
             fit: BoxFit.cover,
             errorBuilder: (context, error, stackTrace) {
-              return Container(
-                color: _getPlanetColor(planet.name),
+              return Center(
                 child: Icon(
                   Icons.public,
                   size: 40,
-                  color: Colors.white.withValues(alpha: 0.9),
+                  color: _getPlanetColor(planet.name),
                 ),
               );
             },

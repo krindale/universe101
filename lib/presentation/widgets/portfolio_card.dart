@@ -38,10 +38,7 @@ class PortfolioCard extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 8),
         decoration: BoxDecoration(
           color: AppColors.cardSurface,
-          border: Border.all(
-            color: AppColors.borderPrimary,
-            width: 1,
-          ),
+          border: Border.all(color: AppColors.borderPrimary, width: 1),
           boxShadow: AppColors.getMinimalShadow(),
         ),
         child: Column(
@@ -56,10 +53,7 @@ class PortfolioCard extends StatelessWidget {
                   vertical: 6,
                 ),
                 decoration: BoxDecoration(
-                  border: Border.all(
-                    color: AppColors.borderPrimary,
-                    width: 1,
-                  ),
+                  border: Border.all(color: AppColors.borderPrimary, width: 1),
                 ),
                 child: Text(
                   tag,
@@ -79,15 +73,7 @@ class PortfolioCard extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     // Icon with background
-                    Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: (accentColor ?? AppColors.accent).withValues(alpha: 0.15),
-                        shape: BoxShape.circle,
-                      ),
-                      child: icon,
-                    ),
+                    SizedBox(width: 100, height: 100, child: icon),
                     const SizedBox(height: 20),
 
                     // Title
@@ -145,10 +131,7 @@ class PortfolioCard extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 border: Border(
-                  top: BorderSide(
-                    color: AppColors.borderPrimary,
-                    width: 1,
-                  ),
+                  top: BorderSide(color: AppColors.borderPrimary, width: 1),
                 ),
               ),
               child: Row(
@@ -259,10 +242,7 @@ class MetricData {
   final String label;
   final String value;
 
-  const MetricData({
-    required this.label,
-    required this.value,
-  });
+  const MetricData({required this.label, required this.value});
 }
 
 class _MetricCell extends StatelessWidget {
