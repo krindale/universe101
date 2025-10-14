@@ -37,9 +37,7 @@ class PlanetOverviewCard extends StatelessWidget {
                   // Tag
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      PlanetTag(text: 'Rocky Planet'),
-                    ],
+                    children: [PlanetTag(text: 'Rocky Planet')],
                   ),
                   const SizedBox(height: 32),
 
@@ -49,10 +47,6 @@ class PlanetOverviewCard extends StatelessWidget {
                     height: 120,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(
-                        color: accentColor,
-                        width: 2,
-                      ),
                       boxShadow: [
                         BoxShadow(
                           color: accentColor.withValues(alpha: 0.3),
@@ -86,6 +80,17 @@ class PlanetOverviewCard extends StatelessWidget {
                       fontSize: 28,
                       fontWeight: FontWeight.w700,
                       color: AppColors.textPrimary,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 8),
+
+                  // Planet subtitle
+                  Text(
+                    _getPlanetSubtitle(planet.name),
+                    style: AppTypography.bodyMedium.copyWith(
+                      fontSize: 14,
+                      color: AppColors.textSecondary,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -124,5 +129,28 @@ class PlanetOverviewCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String _getPlanetSubtitle(String name) {
+    switch (name) {
+      case '수성 (Mercury)':
+        return '태양에 가장 가까운 행성';
+      case '금성 (Venus)':
+        return '가장 뜨거운 행성';
+      case '지구 (Earth)':
+        return '우리의 고향';
+      case '화성 (Mars)':
+        return '붉은 행성';
+      case '목성 (Jupiter)':
+        return '가장 큰 행성';
+      case '토성 (Saturn)':
+        return '아름다운 고리';
+      case '천왕성 (Uranus)':
+        return '옆으로 누운 행성';
+      case '해왕성 (Neptune)':
+        return '가장 먼 행성';
+      default:
+        return '';
+    }
   }
 }
