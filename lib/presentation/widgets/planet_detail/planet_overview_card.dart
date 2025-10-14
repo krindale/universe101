@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_colors_extended.dart';
 import '../../../core/theme/app_typography.dart';
 import '../../../domain/entities/celestial_body.dart';
 import 'common/planet_tag.dart';
@@ -10,10 +9,12 @@ import 'planet_metrics_grid.dart';
 /// Displays planet icon, name, and metrics grid with ChainGPT design
 class PlanetOverviewCard extends StatelessWidget {
   final Planet planet;
+  final Color accentColor;
 
   const PlanetOverviewCard({
     super.key,
     required this.planet,
+    required this.accentColor,
   });
 
   @override
@@ -49,12 +50,12 @@ class PlanetOverviewCard extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: AppColorsExtended.chainGPTOrange,
+                        color: accentColor,
                         width: 2,
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: AppColorsExtended.chainGPTOrange.withValues(alpha: 0.3),
+                          color: accentColor.withValues(alpha: 0.3),
                           blurRadius: 20,
                           spreadRadius: 5,
                         ),
@@ -69,7 +70,7 @@ class PlanetOverviewCard extends StatelessWidget {
                             child: Icon(
                               Icons.public,
                               size: 64,
-                              color: AppColorsExtended.chainGPTOrange,
+                              color: accentColor,
                             ),
                           );
                         },
@@ -106,7 +107,7 @@ class PlanetOverviewCard extends StatelessWidget {
                 width: 42,
                 height: 42,
                 decoration: BoxDecoration(
-                  color: AppColorsExtended.chainGPTOrange,
+                  color: accentColor,
                   border: Border(
                     left: BorderSide(color: AppColors.borderPrimary, width: 1),
                     top: BorderSide(color: AppColors.borderPrimary, width: 1),

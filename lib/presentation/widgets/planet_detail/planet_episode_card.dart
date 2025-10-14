@@ -9,11 +9,13 @@ import 'common/planet_tag.dart';
 class PlanetEpisodeCard extends StatelessWidget {
   final String episode;
   final int index;
+  final Color accentColor;
 
   const PlanetEpisodeCard({
     super.key,
     required this.episode,
     required this.index,
+    required this.accentColor,
   });
 
   @override
@@ -49,12 +51,12 @@ class PlanetEpisodeCard extends StatelessWidget {
                     width: 72,
                     height: 72,
                     decoration: BoxDecoration(
-                      color: AppColorsExtended.chainGPTOrange.withValues(
+                      color: accentColor.withValues(
                         alpha: 0.1,
                       ),
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: AppColorsExtended.chainGPTOrange,
+                        color: accentColor,
                         width: 2,
                       ),
                     ),
@@ -64,7 +66,7 @@ class PlanetEpisodeCard extends StatelessWidget {
                         style: AppTypography.headlineMedium.copyWith(
                           fontSize: 28,
                           fontWeight: FontWeight.w700,
-                          color: AppColorsExtended.chainGPTOrange,
+                          color: accentColor,
                         ),
                       ),
                     ),
@@ -105,7 +107,7 @@ class PlanetEpisodeCard extends StatelessWidget {
                 width: 42,
                 height: 42,
                 decoration: BoxDecoration(
-                  color: AppColorsExtended.chainGPTOrange,
+                  color: accentColor,
                   border: Border(
                     left: BorderSide(color: AppColors.borderPrimary, width: 1),
                     top: BorderSide(color: AppColors.borderPrimary, width: 1),

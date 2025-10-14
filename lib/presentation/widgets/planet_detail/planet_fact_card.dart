@@ -9,11 +9,13 @@ import 'common/planet_tag.dart';
 class PlanetFactCard extends StatelessWidget {
   final String title;
   final String content;
+  final Color accentColor;
 
   const PlanetFactCard({
     super.key,
     required this.title,
     required this.content,
+    required this.accentColor,
   });
 
   @override
@@ -42,7 +44,7 @@ class PlanetFactCard extends StatelessWidget {
                     width: 72,
                     height: 72,
                     decoration: BoxDecoration(
-                      color: AppColorsExtended.chainGPTOrange.withValues(
+                      color: accentColor.withValues(
                         alpha: 0.1,
                       ),
                       shape: BoxShape.circle,
@@ -50,7 +52,7 @@ class PlanetFactCard extends StatelessWidget {
                     child: Icon(
                       Icons.lightbulb_outline,
                       size: 36,
-                      color: AppColorsExtended.chainGPTOrange,
+                      color: accentColor,
                     ),
                   ),
                   const SizedBox(height: 24),
@@ -89,7 +91,7 @@ class PlanetFactCard extends StatelessWidget {
                 width: 42,
                 height: 42,
                 decoration: BoxDecoration(
-                  color: AppColorsExtended.chainGPTOrange,
+                  color: accentColor,
                   border: Border(
                     left: BorderSide(color: AppColors.borderPrimary, width: 1),
                     top: BorderSide(color: AppColors.borderPrimary, width: 1),

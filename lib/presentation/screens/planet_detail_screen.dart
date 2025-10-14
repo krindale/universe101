@@ -24,6 +24,30 @@ class _PlanetDetailScreenState extends State<PlanetDetailScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
+  /// Get planet-specific accent color based on planet name
+  Color get planetColor {
+    switch (widget.planet.name) {
+      case '수성 (Mercury)':
+        return AppColors.mercuryGray;
+      case '금성 (Venus)':
+        return AppColors.venusYellow;
+      case '지구 (Earth)':
+        return AppColors.earthBlue;
+      case '화성 (Mars)':
+        return AppColors.marsRed;
+      case '목성 (Jupiter)':
+        return AppColors.jupiterOrange;
+      case '토성 (Saturn)':
+        return AppColors.saturnBeige;
+      case '천왕성 (Uranus)':
+        return AppColors.uranusCyan;
+      case '해왕성 (Neptune)':
+        return AppColors.neptuneBlue;
+      default:
+        return AppColorsExtended.chainGPTOrange;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -163,7 +187,7 @@ class _PlanetDetailScreenState extends State<PlanetDetailScreen> {
               height: 4,
               decoration: BoxDecoration(
                 color: isActive
-                    ? AppColorsExtended.chainGPTOrange
+                    ? planetColor
                     : AppColorsExtended.neutralGray.withValues(alpha: 0.3),
                 borderRadius: BorderRadius.circular(2),
               ),
@@ -177,17 +201,21 @@ class _PlanetDetailScreenState extends State<PlanetDetailScreen> {
   Widget _buildPage(int index) {
     // Page 0: Overview
     if (index == 0) {
-      return PlanetOverviewCard(planet: widget.planet);
+      return PlanetOverviewCard(planet: widget.planet, accentColor: planetColor);
     }
     // Page 1: Description
     else if (index == 1) {
-      return PlanetDescriptionCard(planet: widget.planet);
+      return PlanetDescriptionCard(planet: widget.planet, accentColor: planetColor);
     }
     // Facts pages (dynamic count)
     else if (index < 2 + widget.planet.facts.length) {
       final factIndex = index - 2;
       final factEntry = widget.planet.facts.entries.elementAt(factIndex);
-      return PlanetFactCard(title: factEntry.key, content: factEntry.value);
+      return PlanetFactCard(
+        title: factEntry.key,
+        content: factEntry.value,
+        accentColor: planetColor,
+      );
     }
     // Episodes pages (remaining)
     else {
@@ -195,6 +223,7 @@ class _PlanetDetailScreenState extends State<PlanetDetailScreen> {
       return PlanetEpisodeCard(
         episode: widget.planet.episodes[episodeIndex],
         index: episodeIndex,
+        accentColor: planetColor,
       );
     }
   }

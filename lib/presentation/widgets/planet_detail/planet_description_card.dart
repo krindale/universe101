@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_colors_extended.dart';
 import '../../../core/theme/app_typography.dart';
 import '../../../domain/entities/celestial_body.dart';
 import 'common/planet_tag.dart';
@@ -10,10 +9,12 @@ import 'common/planet_info_row.dart';
 /// Displays planet overview information with description and basic stats
 class PlanetDescriptionCard extends StatelessWidget {
   final Planet planet;
+  final Color accentColor;
 
   const PlanetDescriptionCard({
     super.key,
     required this.planet,
+    required this.accentColor,
   });
 
   @override
@@ -37,20 +38,35 @@ class PlanetDescriptionCard extends StatelessWidget {
                   PlanetTag(text: 'Planet Overview'),
                   const SizedBox(height: 32),
 
-                  // Description icon
+                  // Planet image
                   Container(
                     width: 72,
                     height: 72,
                     decoration: BoxDecoration(
-                      color: AppColorsExtended.chainGPTOrange.withValues(
-                        alpha: 0.1,
-                      ),
                       shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: accentColor.withValues(alpha: 0.3),
+                          blurRadius: 15,
+                          spreadRadius: 3,
+                        ),
+                      ],
                     ),
-                    child: Icon(
-                      Icons.description_outlined,
-                      size: 36,
-                      color: AppColorsExtended.chainGPTOrange,
+                    child: ClipOval(
+                      child: Image.asset(
+                        planet.imageUrl,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Container(
+                            color: accentColor.withValues(alpha: 0.1),
+                            child: Icon(
+                              Icons.public,
+                              size: 36,
+                              color: accentColor,
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
                   const SizedBox(height: 24),
@@ -101,7 +117,7 @@ class PlanetDescriptionCard extends StatelessWidget {
                 width: 42,
                 height: 42,
                 decoration: BoxDecoration(
-                  color: AppColorsExtended.chainGPTOrange,
+                  color: accentColor,
                   border: Border(
                     left: BorderSide(color: AppColors.borderPrimary, width: 1),
                     top: BorderSide(color: AppColors.borderPrimary, width: 1),
