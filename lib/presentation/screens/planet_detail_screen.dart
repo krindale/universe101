@@ -215,6 +215,7 @@ class _PlanetDetailScreenState extends State<PlanetDetailScreen> {
         title: factEntry.key,
         content: factEntry.value,
         accentColor: planetColor,
+        planetImageUrl: widget.planet.imageUrl,
       );
     }
     // Episodes pages (remaining)

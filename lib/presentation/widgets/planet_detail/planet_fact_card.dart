@@ -10,12 +10,14 @@ class PlanetFactCard extends StatelessWidget {
   final String title;
   final String content;
   final Color accentColor;
+  final String? planetImageUrl;
 
   const PlanetFactCard({
     super.key,
     required this.title,
     required this.content,
     required this.accentColor,
+    this.planetImageUrl,
   });
 
   @override
@@ -28,8 +30,43 @@ class PlanetFactCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(0),
           border: Border.all(color: AppColors.borderPrimary, width: 1),
         ),
-        child: Stack(
-          children: [
+        child: ClipRect(
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              // Background planet image
+              if (planetImageUrl != null)
+                Positioned(
+                  right: -80,
+                  bottom: -80,
+                  child: Opacity(
+                    opacity: 0.3,
+                    child: Container(
+                      width: 300,
+                      height: 300,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: accentColor.withValues(alpha: 0.2),
+                            blurRadius: 30,
+                            spreadRadius: 10,
+                          ),
+                        ],
+                      ),
+                      child: ClipOval(
+                        child: Image.asset(
+                          planetImageUrl!,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return const SizedBox.shrink();
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
             SingleChildScrollView(
               padding: const EdgeInsets.all(24),
               child: Column(
