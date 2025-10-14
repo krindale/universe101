@@ -42,7 +42,7 @@ class PlanetOverviewCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 32),
 
-                  // Planet icon
+                  // Planet image
                   Container(
                     width: 120,
                     height: 120,
@@ -52,12 +52,27 @@ class PlanetOverviewCard extends StatelessWidget {
                         color: AppColorsExtended.chainGPTOrange,
                         width: 2,
                       ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColorsExtended.chainGPTOrange.withValues(alpha: 0.3),
+                          blurRadius: 20,
+                          spreadRadius: 5,
+                        ),
+                      ],
                     ),
-                    child: Center(
-                      child: Icon(
-                        Icons.public,
-                        size: 64,
-                        color: AppColorsExtended.chainGPTOrange,
+                    child: ClipOval(
+                      child: Image.asset(
+                        planet.imageUrl,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Center(
+                            child: Icon(
+                              Icons.public,
+                              size: 64,
+                              color: AppColorsExtended.chainGPTOrange,
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ),
