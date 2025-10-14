@@ -134,21 +134,21 @@ class PlanetOverviewCard extends StatelessWidget {
   String _getPlanetSubtitle(String name) {
     switch (name) {
       case '수성 (Mercury)':
-        return '태양에 가장 가까운 작은 행성, 극심한 온도 변화';
+        return '태양에 가장 가까운 작은 행성, 극심한 온도 변화와 수많은 크레이터';
       case '금성 (Venus)':
-        return '태양계에서 가장 뜨거운 지옥 같은 행성';
+        return '태양계에서 가장 뜨거운 지옥 같은 행성, 두꺼운 이산화탄소 대기';
       case '지구 (Earth)':
-        return '생명이 살아 숨 쉬는 우주의 푸른 오아시스';
+        return '생명이 살아 숨 쉬는 우주의 푸른 오아시스, 물과 산소가 풍부한 행성';
       case '화성 (Mars)':
-        return '붉은 사막의 행성, 인류의 다음 목적지';
+        return '붉은 사막의 행성, 인류의 다음 목적지이자 과거에 물이 흘렀던 세계';
       case '목성 (Jupiter)':
-        return '태양계의 거대한 왕, 강력한 폭풍의 세계';
+        return '태양계의 거대한 왕, 강력한 폭풍과 95개 이상의 위성을 가진 가스 행성';
       case '토성 (Saturn)':
-        return '아름다운 고리를 가진 태양계의 보석';
+        return '아름다운 고리를 가진 태양계의 보석, 물보다 가벼운 신비로운 행성';
       case '천왕성 (Uranus)':
-        return '옆으로 누워 도는 신비로운 얼음 거인';
+        return '옆으로 누워 도는 신비로운 얼음 거인, 청록색 메탄 대기의 행성';
       case '해왕성 (Neptune)':
-        return '태양계 가장 먼 곳의 푸른 얼음 행성';
+        return '태양계 가장 먼 곳의 푸른 얼음 행성, 강력한 바람이 부는 신비의 세계';
       default:
         return '';
     }
