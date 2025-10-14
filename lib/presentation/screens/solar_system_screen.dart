@@ -7,7 +7,7 @@ import '../../domain/entities/celestial_body.dart';
 import '../widgets/cosmic_background.dart';
 import '../widgets/portfolio_card.dart';
 import 'planet_detail_screen.dart';
-import 'mercury_detail_screen.dart';
+import 'planet_detail_screen_chaingpt.dart';
 
 class SolarSystemScreen extends StatelessWidget {
   const SolarSystemScreen({super.key});
@@ -64,9 +64,7 @@ class SolarSystemScreen extends StatelessWidget {
                       itemCount: planets.length,
                       itemBuilder: (context, index) {
                         final planet = planets[index];
-                        return Center(
-                          child: _buildPlanetCard(context, planet),
-                        );
+                        return Center(child: _buildPlanetCard(context, planet));
                       },
                     );
                   },
@@ -105,45 +103,30 @@ class SolarSystemScreen extends StatelessWidget {
           label: '지름',
           value: '${(planet.diameter / 1000).toStringAsFixed(1)}k km',
         ),
-        MetricData(
-          label: '거리',
-          value: '${planet.distanceFromSun}AU',
-        ),
-        MetricData(
-          label: '공전주기',
-          value: _getOrbitalPeriod(planet.name),
-        ),
-        MetricData(
-          label: '위성',
-          value: _getMoons(planet.name),
-        ),
-        MetricData(
-          label: '자전주기',
-          value: _getRotationPeriod(planet.name),
-        ),
-        MetricData(
-          label: '표면온도',
-          value: _getTemperature(planet.name),
-        ),
+        MetricData(label: '거리', value: '${planet.distanceFromSun}AU'),
+        MetricData(label: '공전주기', value: _getOrbitalPeriod(planet.name)),
+        MetricData(label: '위성', value: _getMoons(planet.name)),
+        MetricData(label: '자전주기', value: _getRotationPeriod(planet.name)),
+        MetricData(label: '표면온도', value: _getTemperature(planet.name)),
       ],
       accentColor: _getPlanetColor(planet.name),
       onTap: () {
-        // Use MercuryDetailScreen for Mercury, default for others
-        if (planet.name == '수성 (Mercury)') {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const MercuryDetailScreen(),
-            ),
-          );
-        } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => PlanetDetailScreen(planet: planet),
-            ),
-          );
-        }
+        // Use ChainGPT design for Mercury, default for others
+        // if (planet.name == '수성 (Mercury)') {
+        //   Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) => PlanetDetailScreenChainGPT(planet: planet),
+        //     ),
+        //   );
+        // } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PlanetDetailScreenChainGPT(planet: planet),
+          ),
+        );
+        // }
       },
     );
   }
