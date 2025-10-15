@@ -48,6 +48,36 @@ class _PlanetDetailScreenState extends State<PlanetDetailScreen> {
     }
   }
 
+  /// Extract English planet name from Korean format
+  String get planetNameEnglish {
+    final match = RegExp(r'\(([^)]+)\)').firstMatch(widget.planet.name);
+    return match?.group(1)?.toLowerCase() ?? widget.planet.name.toLowerCase();
+  }
+
+  /// Get the total number of avatars for current planet
+  int get avatarCount {
+    switch (planetNameEnglish) {
+      case 'earth':
+        return 11;
+      case 'jupiter':
+        return 12;
+      case 'mars':
+        return 8;
+      case 'mercury':
+        return 10;
+      case 'neptune':
+        return 13;
+      case 'saturn':
+        return 13;
+      case 'uranus':
+        return 9;
+      case 'venus':
+        return 9;
+      default:
+        return 10;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -211,19 +241,27 @@ class _PlanetDetailScreenState extends State<PlanetDetailScreen> {
     else if (index < 2 + widget.planet.facts.length) {
       final factIndex = index - 2;
       final factEntry = widget.planet.facts.entries.elementAt(factIndex);
+      // Calculate avatar index with rotation based on available avatars
+      final avatarIndex = (factIndex % avatarCount) + 1;
       return PlanetFactCard(
         title: factEntry.key,
         content: factEntry.value,
         accentColor: planetColor,
+        planetName: planetNameEnglish,
+        avatarIndex: avatarIndex,
       );
     }
     // Episodes pages (remaining)
     else {
       final episodeIndex = index - 2 - widget.planet.facts.length;
+      // Calculate avatar index with rotation based on available avatars
+      final avatarIndex = (episodeIndex % avatarCount) + 1;
       return PlanetEpisodeCard(
         episode: widget.planet.episodes[episodeIndex],
         index: episodeIndex,
         accentColor: planetColor,
+        planetName: planetNameEnglish,
+        avatarIndex: avatarIndex,
       );
     }
   }

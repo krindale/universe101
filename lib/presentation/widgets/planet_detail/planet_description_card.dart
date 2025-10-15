@@ -44,13 +44,10 @@ class PlanetDescriptionCard extends StatelessWidget {
                     height: 72,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: accentColor.withValues(alpha: 0.3),
-                          blurRadius: 15,
-                          spreadRadius: 3,
-                        ),
-                      ],
+                      border: Border.all(
+                        color: accentColor.withValues(alpha: 0.5),
+                        width: 2,
+                      ),
                     ),
                     child: ClipOval(
                       child: Image.asset(

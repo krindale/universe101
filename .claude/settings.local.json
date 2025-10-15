@@ -25,7 +25,10 @@
       "Bash(C:Userswow32AppDataLocalAndroidSdkplatform-toolsadb.exe shell am start -n com.example.universe101/.MainActivity)",
       "Bash(git checkout:*)",
       "Bash(git rm:*)",
-      "Bash(C:Userswow32AppDataLocalAndroidSdkplatform-toolsadb.exe devices)"
+      "Bash(C:Userswow32AppDataLocalAndroidSdkplatform-toolsadb.exe devices)",
+      "Bash(for planet in earth jupiter mars mercury neptune saturn uranus venus)",
+      "Bash(done)",
+      "Bash(awk:*)"
     ],
     "deny": [],
     "ask": []

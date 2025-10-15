@@ -73,7 +73,7 @@ class PortfolioCard extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     // Icon with background
-                    SizedBox(width: 100, height: 100, child: icon),
+                    SizedBox(height: 100, child: icon),
                     const SizedBox(height: 20),
 
                     // Title

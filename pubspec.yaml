@@ -89,6 +89,14 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/solar_system/
+    - assets/solar_system/avatars/earth/
+    - assets/solar_system/avatars/jupiter/
+    - assets/solar_system/avatars/mars/
+    - assets/solar_system/avatars/mercury/
+    - assets/solar_system/avatars/neptune/
+    - assets/solar_system/avatars/saturn/
+    - assets/solar_system/avatars/uranus/
+    - assets/solar_system/avatars/venus/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

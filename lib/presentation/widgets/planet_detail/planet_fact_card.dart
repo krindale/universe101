@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_colors_extended.dart';
 import '../../../core/theme/app_typography.dart';
 import 'common/planet_tag.dart';
 
@@ -10,12 +9,16 @@ class PlanetFactCard extends StatelessWidget {
   final String title;
   final String content;
   final Color accentColor;
+  final String planetName;
+  final int avatarIndex;
 
   const PlanetFactCard({
     super.key,
     required this.title,
     required this.content,
     required this.accentColor,
+    required this.planetName,
+    required this.avatarIndex,
   });
 
   @override
@@ -81,24 +84,35 @@ class PlanetFactCard extends StatelessWidget {
               ),
             ),
 
-            // Arrow button (bottom right)
+            // Planet avatar (bottom right)
             Positioned(
               right: 24,
               bottom: 24,
-              child: Container(
-                width: 42,
-                height: 42,
-                decoration: BoxDecoration(
-                  color: accentColor,
-                  border: Border(
-                    left: BorderSide(color: AppColors.borderPrimary, width: 1),
-                    top: BorderSide(color: AppColors.borderPrimary, width: 1),
-                  ),
-                ),
-                child: const Icon(
-                  Icons.arrow_forward,
-                  color: Colors.white,
-                  size: 28,
+              child: SizedBox(
+                height: 120,
+                child: Image.asset(
+                  'assets/solar_system/avatars/${planetName.toLowerCase()}/${planetName.toLowerCase()}_avatar_${avatarIndex.toString().padLeft(2, '0')}.png',
+                  height: 120,
+                  fit: BoxFit.contain,
+                  errorBuilder: (context, error, stackTrace) {
+                    // Fallback to arrow icon if image not found
+                    return Container(
+                      width: 42,
+                      height: 42,
+                      decoration: BoxDecoration(
+                        color: accentColor,
+                        border: Border(
+                          left: BorderSide(color: AppColors.borderPrimary, width: 1),
+                          top: BorderSide(color: AppColors.borderPrimary, width: 1),
+                        ),
+                      ),
+                      child: const Icon(
+                        Icons.arrow_forward,
+                        color: Colors.white,
+                        size: 28,
+                      ),
+                    );
+                  },
                 ),
               ),
             ),

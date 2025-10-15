@@ -42,33 +42,21 @@ class PlanetOverviewCard extends StatelessWidget {
                   const SizedBox(height: 32),
 
                   // Planet image
-                  Container(
-                    width: 120,
+                  SizedBox(
                     height: 120,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: accentColor.withValues(alpha: 0.3),
-                          blurRadius: 20,
-                          spreadRadius: 5,
-                        ),
-                      ],
-                    ),
-                    child: ClipOval(
-                      child: Image.asset(
-                        planet.imageUrl,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Center(
-                            child: Icon(
-                              Icons.public,
-                              size: 64,
-                              color: accentColor,
-                            ),
-                          );
-                        },
-                      ),
+                    child: Image.asset(
+                      planet.imageUrl,
+                      height: 120,
+                      fit: BoxFit.fitHeight,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Center(
+                          child: Icon(
+                            Icons.public,
+                            size: 64,
+                            color: accentColor,
+                          ),
+                        );
+                      },
                     ),
                   ),
                   const SizedBox(height: 42),

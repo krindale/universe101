@@ -94,33 +94,21 @@ class SolarSystemScreen extends StatelessWidget {
   ) {
     return PortfolioCard(
       tag: _getPlanetType(planet.name),
-      icon: Container(
-        width: 80,
+      icon: SizedBox(
         height: 80,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: _getPlanetColor(planet.name).withValues(alpha: 0.3),
-              blurRadius: 20,
-              spreadRadius: 5,
-            ),
-          ],
-        ),
-        child: ClipOval(
-          child: Image.asset(
-            planetDetail.imageUrl,
-            fit: BoxFit.cover,
-            errorBuilder: (context, error, stackTrace) {
-              return Center(
-                child: Icon(
-                  Icons.public,
-                  size: 40,
-                  color: _getPlanetColor(planet.name),
-                ),
-              );
-            },
-          ),
+        child: Image.asset(
+          planetDetail.imageUrl,
+          height: 80,
+          fit: BoxFit.fitHeight,
+          errorBuilder: (context, error, stackTrace) {
+            return Center(
+              child: Icon(
+                Icons.public,
+                size: 40,
+                color: _getPlanetColor(planet.name),
+              ),
+            );
+          },
         ),
       ),
       title: planet.name,

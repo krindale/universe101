@@ -9,12 +9,16 @@ class PlanetEpisodeCard extends StatelessWidget {
   final String episode;
   final int index;
   final Color accentColor;
+  final String planetName;
+  final int avatarIndex;
 
   const PlanetEpisodeCard({
     super.key,
     required this.episode,
     required this.index,
     required this.accentColor,
+    required this.planetName,
+    required this.avatarIndex,
   });
 
   @override
@@ -98,24 +102,35 @@ class PlanetEpisodeCard extends StatelessWidget {
               ),
             ),
 
-            // Arrow button (bottom right)
+            // Planet avatar (bottom right)
             Positioned(
               right: 24,
               bottom: 24,
-              child: Container(
-                width: 42,
-                height: 42,
-                decoration: BoxDecoration(
-                  color: accentColor,
-                  border: Border(
-                    left: BorderSide(color: AppColors.borderPrimary, width: 1),
-                    top: BorderSide(color: AppColors.borderPrimary, width: 1),
-                  ),
-                ),
-                child: const Icon(
-                  Icons.arrow_forward,
-                  color: Colors.white,
-                  size: 28,
+              child: SizedBox(
+                height: 120,
+                child: Image.asset(
+                  'assets/solar_system/avatars/${planetName.toLowerCase()}/${planetName.toLowerCase()}_avatar_${avatarIndex.toString().padLeft(2, '0')}.png',
+                  height: 120,
+                  fit: BoxFit.contain,
+                  errorBuilder: (context, error, stackTrace) {
+                    // Fallback to arrow icon if image not found
+                    return Container(
+                      width: 42,
+                      height: 42,
+                      decoration: BoxDecoration(
+                        color: accentColor,
+                        border: Border(
+                          left: BorderSide(color: AppColors.borderPrimary, width: 1),
+                          top: BorderSide(color: AppColors.borderPrimary, width: 1),
+                        ),
+                      ),
+                      child: const Icon(
+                        Icons.arrow_forward,
+                        color: Colors.white,
+                        size: 28,
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
