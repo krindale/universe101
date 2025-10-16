@@ -1,0 +1,240 @@
+import 'package:flutter/material.dart';
+import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_colors_extended.dart';
+import '../../core/theme/app_typography.dart';
+import '../../domain/entities/celestial_body.dart';
+import '../widgets/star_detail/star_overview_card.dart';
+import '../widgets/star_detail/star_description_card.dart';
+import '../widgets/star_detail/star_fact_card.dart';
+import '../widgets/star_detail/star_episode_card.dart';
+
+/// Generic star detail screen with horizontal paging
+/// Reusable for Sun and other stars - follows SOLID principles
+/// Matches ChainGPT Labs design system
+class StarDetailScreen extends StatefulWidget {
+  final Star star;
+
+  const StarDetailScreen({super.key, required this.star});
+
+  @override
+  State<StarDetailScreen> createState() => _StarDetailScreenState();
+}
+
+class _StarDetailScreenState extends State<StarDetailScreen> {
+  final PageController _pageController = PageController();
+  int _currentPage = 0;
+
+  /// Get star-specific accent color based on star name
+  Color get starColor {
+    switch (widget.star.name) {
+      case '태양 (Sun)':
+        return AppColors.sunYellow;
+      default:
+        return AppColorsExtended.chainGPTOrange;
+    }
+  }
+
+  /// Extract English star name from Korean format
+  String get starNameEnglish {
+    final match = RegExp(r'\(([^)]+)\)').firstMatch(widget.star.name);
+    return match?.group(1)?.toLowerCase() ?? widget.star.name.toLowerCase();
+  }
+
+  /// Get the total number of avatars for current star
+  int get avatarCount {
+    switch (starNameEnglish) {
+      case 'sun':
+        return 10;
+      default:
+        return 10;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController.addListener(() {
+      final page = _pageController.page?.round() ?? 0;
+      if (page != _currentPage) {
+        setState(() {
+          _currentPage = page;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final totalPages =
+        2 + widget.star.facts.length + widget.star.episodes.length;
+
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      body: SafeArea(
+        child: Stack(
+          children: [
+            // Main paging content
+            PageView.builder(
+              controller: _pageController,
+              itemCount: totalPages,
+              itemBuilder: (context, index) {
+                return _buildPage(index);
+              },
+            ),
+
+            // Top overlay with back button and page indicator
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 8,
+                  vertical: 16,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // Back button
+                    GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: Container(
+                        width: 36,
+                        height: 36,
+                        decoration: BoxDecoration(
+                          color: AppColors.cardSurface,
+                          border: Border.all(
+                            color: AppColors.borderPrimary,
+                            width: 1,
+                          ),
+                        ),
+                        child: const Icon(
+                          Icons.arrow_back,
+                          color: AppColors.textPrimary,
+                          size: 18,
+                        ),
+                      ),
+                    ),
+
+                    // Page indicator with section label
+                    _buildPageIndicator(totalPages),
+
+                    // Spacer to balance back button
+                    const SizedBox(width: 36),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPageIndicator(int totalPages) {
+    final factsCount = widget.star.facts.length;
+
+    // Determine current section and pages in that section
+    String sectionLabel;
+    int sectionStart;
+    int sectionEnd;
+
+    if (_currentPage < 2) {
+      // Overview section (pages 0-1)
+      sectionLabel = 'Overview';
+      sectionStart = 0;
+      sectionEnd = 2;
+    } else if (_currentPage < 2 + factsCount) {
+      // Facts section (dynamic based on facts count)
+      sectionLabel = 'Facts';
+      sectionStart = 2;
+      sectionEnd = 2 + factsCount;
+    } else {
+      // Episodes section (remaining pages)
+      sectionLabel = 'Episodes';
+      sectionStart = 2 + factsCount;
+      sectionEnd = totalPages;
+    }
+
+    final sectionPages = sectionEnd - sectionStart;
+    final currentInSection = _currentPage - sectionStart;
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Section label
+        Text(
+          sectionLabel,
+          style: AppTypography.labelSmall.copyWith(
+            color: AppColorsExtended.neutralGray,
+            fontSize: 9,
+            letterSpacing: 0.5,
+          ),
+        ),
+        const SizedBox(height: 4),
+        // Section progress dots (show all dots, no limit)
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: List.generate(sectionPages, (index) {
+            final isActive = currentInSection == index;
+            return Container(
+              margin: const EdgeInsets.symmetric(horizontal: 2),
+              width: isActive ? 16 : 4,
+              height: 4,
+              decoration: BoxDecoration(
+                color: isActive
+                    ? starColor
+                    : AppColorsExtended.neutralGray.withValues(alpha: 0.3),
+                borderRadius: BorderRadius.circular(2),
+              ),
+            );
+          }),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPage(int index) {
+    // Page 0: Overview
+    if (index == 0) {
+      return StarOverviewCard(star: widget.star, accentColor: starColor);
+    }
+    // Page 1: Description
+    else if (index == 1) {
+      return StarDescriptionCard(star: widget.star, accentColor: starColor);
+    }
+    // Facts pages (dynamic count)
+    else if (index < 2 + widget.star.facts.length) {
+      final factIndex = index - 2;
+      final factEntry = widget.star.facts.entries.elementAt(factIndex);
+      // Calculate avatar index with rotation based on available avatars
+      final avatarIndex = (factIndex % avatarCount) + 1;
+      return StarFactCard(
+        title: factEntry.key,
+        content: factEntry.value,
+        accentColor: starColor,
+        starName: starNameEnglish,
+        avatarIndex: avatarIndex,
+      );
+    }
+    // Episodes pages (remaining)
+    else {
+      final episodeIndex = index - 2 - widget.star.facts.length;
+      // Calculate avatar index with rotation based on available avatars
+      final avatarIndex = (episodeIndex % avatarCount) + 1;
+      return StarEpisodeCard(
+        episode: widget.star.episodes[episodeIndex],
+        index: episodeIndex,
+        accentColor: starColor,
+        starName: starNameEnglish,
+        avatarIndex: avatarIndex,
+      );
+    }
+  }
+}
