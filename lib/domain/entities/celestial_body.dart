@@ -152,3 +152,73 @@ class Planet extends CelestialBody {
     );
   }
 }
+
+/// Star-specific model (for Sun and other stars)
+class Star extends CelestialBody {
+  final double diameter; // in km
+  final double mass; // in solar masses
+  final double surfaceTemperature; // in Kelvin
+  final double luminosity; // in solar luminosities
+  final String spectralType;
+  final int age; // in billions of years
+  final String composition;
+
+  Star({
+    required super.id,
+    required super.name,
+    required super.description,
+    required super.imageUrl,
+    super.modelUrl,
+    required super.facts,
+    required super.episodes,
+    super.createdAt,
+    super.updatedAt,
+    required this.diameter,
+    required this.mass,
+    required this.surfaceTemperature,
+    required this.luminosity,
+    required this.spectralType,
+    required this.age,
+    required this.composition,
+  }) : super(type: CelestialBodyType.star);
+
+  @override
+  Map<String, dynamic> toJson() {
+    final json = super.toJson();
+    json.addAll({
+      'diameter': diameter,
+      'mass': mass,
+      'surfaceTemperature': surfaceTemperature,
+      'luminosity': luminosity,
+      'spectralType': spectralType,
+      'age': age,
+      'composition': composition,
+    });
+    return json;
+  }
+
+  factory Star.fromJson(Map<String, dynamic> json) {
+    return Star(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      description: json['description'] as String,
+      imageUrl: json['imageUrl'] as String,
+      modelUrl: json['modelUrl'] as String?,
+      facts: Map<String, String>.from(json['facts'] as Map),
+      episodes: List<String>.from(json['episodes'] as List),
+      createdAt: json['createdAt'] != null
+          ? DateTime.parse(json['createdAt'] as String)
+          : null,
+      updatedAt: json['updatedAt'] != null
+          ? DateTime.parse(json['updatedAt'] as String)
+          : null,
+      diameter: (json['diameter'] as num).toDouble(),
+      mass: (json['mass'] as num).toDouble(),
+      surfaceTemperature: (json['surfaceTemperature'] as num).toDouble(),
+      luminosity: (json['luminosity'] as num).toDouble(),
+      spectralType: json['spectralType'] as String,
+      age: json['age'] as int,
+      composition: json['composition'] as String,
+    );
+  }
+}

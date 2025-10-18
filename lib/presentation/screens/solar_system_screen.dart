@@ -8,6 +8,7 @@ import '../widgets/cosmic_background.dart';
 import '../widgets/portfolio_card.dart';
 import '../../data/datasources/solar_system_data.dart';
 import 'planet_detail_screen.dart';
+import 'star_detail_screen.dart';
 
 class SolarSystemScreen extends StatelessWidget {
   const SolarSystemScreen({super.key});
@@ -58,14 +59,24 @@ class SolarSystemScreen extends StatelessWidget {
                     }
 
                     final planets = snapshot.data ?? [];
+                    final sun = SolarSystemData.getSun();
 
                     return PageView.builder(
                       controller: PageController(viewportFraction: 0.88),
-                      itemCount: planets.length,
+                      itemCount: planets.length + 1, // +1 for the Sun
                       itemBuilder: (context, index) {
-                        final planet = planets[index];
+                        // First card is the Sun
+                        if (index == 0) {
+                          return Center(
+                            child: _buildSunCard(context, sun),
+                          );
+                        }
+
+                        // Remaining cards are planets
+                        final planetIndex = index - 1;
+                        final planet = planets[planetIndex];
                         final planetDetail =
-                            SolarSystemData.getAllPlanets()[index];
+                            SolarSystemData.getAllPlanets()[planetIndex];
                         return Center(
                           child: _buildPlanetCard(
                             context,
@@ -84,6 +95,52 @@ class SolarSystemScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildSunCard(BuildContext context, Star sun) {
+    return PortfolioCard(
+      tag: 'G-Type Star',
+      icon: SizedBox(
+        height: 80,
+        child: Image.asset(
+          sun.imageUrl,
+          height: 80,
+          fit: BoxFit.fitHeight,
+          errorBuilder: (context, error, stackTrace) {
+            return Center(
+              child: Icon(
+                Icons.wb_sunny,
+                size: 40,
+                color: AppColors.sunYellow,
+              ),
+            );
+          },
+        ),
+      ),
+      title: sun.name,
+      subtitle: '태양계의 중심이자 생명의 근원',
+      description: '태양은 태양계 중심에 있는 항성으로, 핵융합 반응을 통해 빛과 열을 방출합니다. 태양계 전체 질량의 99.86%를 차지하며, 모든 행성들이 태양 주위를 공전합니다.',
+      metrics: [
+        MetricData(
+          label: '지름',
+          value: '${(sun.diameter / 1000).toStringAsFixed(0)}k km',
+        ),
+        MetricData(label: '질량', value: '${sun.mass} M☉'),
+        MetricData(label: '표면온도', value: '${sun.surfaceTemperature.toInt()}K'),
+        MetricData(label: '분광형', value: sun.spectralType),
+        MetricData(label: '나이', value: '${sun.age * 10}억년'),
+        MetricData(label: '광도', value: '${sun.luminosity} L☉'),
+      ],
+      accentColor: AppColors.sunYellow,
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => StarDetailScreen(star: sun),
+          ),
+        );
+      },
     );
   }
 
