@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
-import '../../data/datasources/database_helper.dart';
+import '../../data/datasources/space_exploration_data.dart';
 import '../../domain/entities/space_exploration.dart';
 import '../widgets/cosmic_background.dart';
 import '../widgets/portfolio_card.dart';
+import 'exploration_detail_screen.dart';
 
 class ExplorationScreen extends StatelessWidget {
   const ExplorationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final databaseHelper = DatabaseHelper();
+    final explorations = SpaceExplorationData.getAllExplorations();
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -34,29 +35,12 @@ class ExplorationScreen extends StatelessWidget {
 
               // Horizontal PageView
               Expanded(
-                child: FutureBuilder<List<SpaceExploration>>(
-                  future: databaseHelper.getAllExplorations(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-
-                    if (snapshot.hasError) {
-                      return Center(
-                        child: Text('Error: ${snapshot.error}'),
-                      );
-                    }
-
-                    final explorations = snapshot.data ?? [];
-
-                    return PageView.builder(
-                      controller: PageController(viewportFraction: 0.88),
-                      itemCount: explorations.length,
-                      itemBuilder: (context, index) {
-                        return Center(
-                          child: _buildExplorationCard(context, explorations[index]),
-                        );
-                      },
+                child: PageView.builder(
+                  controller: PageController(viewportFraction: 0.88),
+                  itemCount: explorations.length,
+                  itemBuilder: (context, index) {
+                    return Center(
+                      child: _buildExplorationCard(context, explorations[index]),
                     );
                   },
                 ),
@@ -95,11 +79,16 @@ class ExplorationScreen extends StatelessWidget {
         MetricData(label: '목적지', value: exploration.destination ?? '미지정'),
         MetricData(label: '우주선', value: exploration.spacecraftName ?? '미지정'),
         MetricData(label: '승무원', value: '${exploration.crewMembers.length}명'),
-        MetricData(label: '성과', value: '${exploration.achievements.length}개'),
+        MetricData(label: '주요 사실', value: '${exploration.facts.length}개'),
       ],
       accentColor: _getExplorationColor(exploration.type),
       onTap: () {
-        // TODO: Navigate to exploration detail
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ExplorationDetailScreen(exploration: exploration),
+          ),
+        );
       },
     );
   }

@@ -4,12 +4,6 @@ import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'core/theme/app_theme.dart';
 import 'core/providers/theme_provider.dart';
-import 'data/datasources/database_helper.dart';
-import 'data/repositories/planet_repository_impl.dart';
-import 'domain/repositories/planet_repository.dart';
-import 'domain/usecases/seed_solar_system.dart';
-import 'domain/usecases/seed_cosmic_phenomena.dart';
-import 'domain/usecases/seed_space_explorations.dart';
 import 'presentation/screens/main_navigation_screen.dart';
 
 void main() async {
@@ -19,50 +13,26 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  final databaseHelper = DatabaseHelper();
-  final planetRepository = PlanetRepositoryImpl(databaseHelper);
-
-  final seedSolarSystem = SeedSolarSystem(planetRepository);
-  if (!await seedSolarSystem.isSeeded()) {
-    await seedSolarSystem.call();
-  }
-
-  final seedCosmicPhenomena = SeedCosmicPhenomena(databaseHelper);
-  if (!await seedCosmicPhenomena.isSeeded()) {
-    await seedCosmicPhenomena.call();
-  }
-
-  final seedSpaceExplorations = SeedSpaceExplorations(databaseHelper);
-  if (!await seedSpaceExplorations.isSeeded()) {
-    await seedSpaceExplorations.call();
-  }
-
   final themeProvider = ThemeProvider();
   await themeProvider.initialize();
 
   runApp(CosmoEduApp(
-    planetRepository: planetRepository,
     themeProvider: themeProvider,
   ));
 }
 
 class CosmoEduApp extends StatelessWidget {
-  final PlanetRepository planetRepository;
   final ThemeProvider themeProvider;
 
   const CosmoEduApp({
     super.key,
-    required this.planetRepository,
     required this.themeProvider,
   });
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        Provider<PlanetRepository>.value(value: planetRepository),
-        ChangeNotifierProvider<ThemeProvider>.value(value: themeProvider),
-      ],
+    return ChangeNotifierProvider<ThemeProvider>.value(
+      value: themeProvider,
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, child) {
           return MaterialApp(

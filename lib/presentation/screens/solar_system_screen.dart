@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
-import '../../domain/repositories/planet_repository.dart';
 import '../../domain/entities/celestial_body.dart';
 import '../widgets/cosmic_background.dart';
 import '../widgets/portfolio_card.dart';
@@ -15,7 +13,8 @@ class SolarSystemScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final planetRepository = Provider.of<PlanetRepository>(context);
+    final planets = SolarSystemData.getAllPlanets();
+    final sun = SolarSystemData.getSun();
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -38,53 +37,22 @@ class SolarSystemScreen extends StatelessWidget {
 
               // Horizontal scrolling cards
               Expanded(
-                child: FutureBuilder<List<Planet>>(
-                  future: planetRepository.getAllPlanets(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(
-                        child: CircularProgressIndicator(
-                          color: AppColors.accent,
-                        ),
-                      );
-                    }
-
-                    if (snapshot.hasError) {
+                child: PageView.builder(
+                  controller: PageController(viewportFraction: 0.88),
+                  itemCount: planets.length + 1, // +1 for the Sun
+                  itemBuilder: (context, index) {
+                    // First card is the Sun
+                    if (index == 0) {
                       return Center(
-                        child: Text(
-                          'Error: ${snapshot.error}',
-                          style: AppTypography.bodyMedium,
-                        ),
+                        child: _buildSunCard(context, sun),
                       );
                     }
 
-                    final planets = snapshot.data ?? [];
-                    final sun = SolarSystemData.getSun();
-
-                    return PageView.builder(
-                      controller: PageController(viewportFraction: 0.88),
-                      itemCount: planets.length + 1, // +1 for the Sun
-                      itemBuilder: (context, index) {
-                        // First card is the Sun
-                        if (index == 0) {
-                          return Center(
-                            child: _buildSunCard(context, sun),
-                          );
-                        }
-
-                        // Remaining cards are planets
-                        final planetIndex = index - 1;
-                        final planet = planets[planetIndex];
-                        final planetDetail =
-                            SolarSystemData.getAllPlanets()[planetIndex];
-                        return Center(
-                          child: _buildPlanetCard(
-                            context,
-                            planet,
-                            planetDetail,
-                          ),
-                        );
-                      },
+                    // Remaining cards are planets
+                    final planetIndex = index - 1;
+                    final planet = planets[planetIndex];
+                    return Center(
+                      child: _buildPlanetCard(context, planet),
                     );
                   },
                 ),
@@ -147,14 +115,13 @@ class SolarSystemScreen extends StatelessWidget {
   Widget _buildPlanetCard(
     BuildContext context,
     Planet planet,
-    Planet planetDetail,
   ) {
     return PortfolioCard(
       tag: _getPlanetType(planet.name),
       icon: SizedBox(
         height: 80,
         child: Image.asset(
-          planetDetail.imageUrl,
+          planet.imageUrl,
           height: 80,
           fit: BoxFit.fitHeight,
           errorBuilder: (context, error, stackTrace) {
@@ -184,11 +151,10 @@ class SolarSystemScreen extends StatelessWidget {
       ],
       accentColor: _getPlanetColor(planet.name),
       onTap: () {
-        // Use ChainGPT design for Mercury, default for others
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => PlanetDetailScreen(planet: planetDetail),
+            builder: (context) => PlanetDetailScreen(planet: planet),
           ),
         );
       },

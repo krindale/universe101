@@ -1,34 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(flutterfire configure:*)",
-      "Bash(dart pub global activate:*)",
-      "Bash(flutter analyze:*)",
-      "Bash(flutter test:*)",
-      "Bash(git init:*)",
-      "Bash(git add:*)",
-      "Bash(git commit:*)",
-      "Bash(flutter:*)",
-      "Bash(cat:*)",
-      "Bash(task-master:*)",
-      "Bash(mkdir:*)",
-      "Bash(touch:*)",
-      "Bash(nc localhost 5449)",
-      "Bash(adb:*)",
-      "Read(//c/Users/wow32/AppData/Local/Android/Sdk/platform-tools/**)",
-      "Bash(./adb.exe shell input text:*)",
-      "Bash(./adb.exe shell input tap:*)",
-      "Bash(./adb.exe shell input keyevent 4)",
-      "Bash(./adb.exe shell am start -n com.example.universe101/.MainActivity)",
-      "Bash(git log:*)",
-      "Bash(./adb.exe shell input swipe:*)",
-      "Bash(C:Userswow32AppDataLocalAndroidSdkplatform-toolsadb.exe shell am start -n com.example.universe101/.MainActivity)",
-      "Bash(git checkout:*)",
-      "Bash(git rm:*)",
-      "Bash(C:Userswow32AppDataLocalAndroidSdkplatform-toolsadb.exe devices)",
-      "Bash(for planet in earth jupiter mars mercury neptune saturn uranus venus)",
-      "Bash(done)",
-      "Bash(awk:*)"
+      "Bash(git checkout -b refactor/simplify-data-architecture)",
+      "Bash(git add .claude/settings.local.json lib/ pubspec.* test/)"
     ],
     "deny": [],
     "ask": []
