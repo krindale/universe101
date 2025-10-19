@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
-import '../../data/datasources/database_helper.dart';
+import '../../data/datasources/cosmic_phenomena_data.dart';
 import '../../domain/entities/cosmic_phenomenon.dart';
 import '../widgets/cosmic_background.dart';
 import '../widgets/portfolio_card.dart';
+import 'phenomenon_detail_screen.dart';
 
 class PhenomenaScreen extends StatelessWidget {
   const PhenomenaScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final databaseHelper = DatabaseHelper();
+    final phenomena = CosmicPhenomenaData.getAllPhenomena();
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -34,29 +35,12 @@ class PhenomenaScreen extends StatelessWidget {
 
               // Horizontal PageView
               Expanded(
-                child: FutureBuilder<List<CosmicPhenomenon>>(
-                  future: databaseHelper.getAllPhenomena(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-
-                    if (snapshot.hasError) {
-                      return Center(
-                        child: Text('Error: ${snapshot.error}'),
-                      );
-                    }
-
-                    final phenomena = snapshot.data ?? [];
-
-                    return PageView.builder(
-                      controller: PageController(viewportFraction: 0.88),
-                      itemCount: phenomena.length,
-                      itemBuilder: (context, index) {
-                        return Center(
-                          child: _buildPhenomenonCard(context, phenomena[index]),
-                        );
-                      },
+                child: PageView.builder(
+                  controller: PageController(viewportFraction: 0.88),
+                  itemCount: phenomena.length,
+                  itemBuilder: (context, index) {
+                    return Center(
+                      child: _buildPhenomenonCard(context, phenomena[index]),
                     );
                   },
                 ),
@@ -104,7 +88,12 @@ class PhenomenaScreen extends StatelessWidget {
       ],
       accentColor: _getPhenomenonColor(phenomenon.type),
       onTap: () {
-        // TODO: Navigate to phenomenon detail
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => PhenomenonDetailScreen(phenomenon: phenomenon),
+          ),
+        );
       },
     );
   }

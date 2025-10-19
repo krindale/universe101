@@ -6,8 +6,8 @@ class CosmicPhenomenon {
   final PhenomenonType type;
   final String imageUrl;
   final String? videoUrl;
-  final List<String> facts;
-  final String historicalContext;
+  final Map<String, String> facts;
+  final List<String> episodes;
   final DateTime? nextOccurrence;
   final String location; // Where it can be observed
   final int rarity; // 1-10 scale
@@ -23,7 +23,7 @@ class CosmicPhenomenon {
     required this.imageUrl,
     this.videoUrl,
     required this.facts,
-    required this.historicalContext,
+    required this.episodes,
     this.nextOccurrence,
     required this.location,
     required this.rarity,
@@ -42,7 +42,7 @@ class CosmicPhenomenon {
       'imageUrl': imageUrl,
       'videoUrl': videoUrl,
       'facts': facts,
-      'historicalContext': historicalContext,
+      'episodes': episodes,
       'nextOccurrence': nextOccurrence?.toIso8601String(),
       'location': location,
       'rarity': rarity,
@@ -54,6 +54,22 @@ class CosmicPhenomenon {
 
   /// Create from JSON from database
   factory CosmicPhenomenon.fromJson(Map<String, dynamic> json) {
+    // Handle facts - support both legacy List format and new Map format
+    Map<String, String> parsedFacts;
+    if (json['facts'] is List) {
+      // Legacy format: List<String> - convert to Map with index as key
+      final factsList = List<String>.from(json['facts'] as List);
+      parsedFacts = {};
+      for (int i = 0; i < factsList.length; i++) {
+        parsedFacts['Fact ${i + 1}'] = factsList[i];
+      }
+    } else if (json['facts'] is Map) {
+      // New format: Map<String, String>
+      parsedFacts = Map<String, String>.from(json['facts'] as Map);
+    } else {
+      parsedFacts = {};
+    }
+
     return CosmicPhenomenon(
       id: json['id'] as String,
       name: json['name'] as String,
@@ -64,8 +80,8 @@ class CosmicPhenomenon {
       ),
       imageUrl: json['imageUrl'] as String,
       videoUrl: json['videoUrl'] as String?,
-      facts: List<String>.from(json['facts'] as List),
-      historicalContext: json['historicalContext'] as String,
+      facts: parsedFacts,
+      episodes: List<String>.from(json['episodes'] as List),
       nextOccurrence: json['nextOccurrence'] != null
           ? DateTime.parse(json['nextOccurrence'] as String)
           : null,

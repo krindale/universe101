@@ -9,11 +9,11 @@ class SpaceExploration {
   final DateTime launchDate;
   final DateTime? endDate;
   final String? destination;
-  final List<String> achievements;
+  final Map<String, String> facts; // Changed from List to Map, renamed from achievements
+  final List<String> episodes; // Added episodes field like CosmicPhenomenon
   final String imageUrl;
   final List<String> crewMembers;
   final ExplorationStatus status;
-  final String historicalSignificance;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
@@ -27,11 +27,11 @@ class SpaceExploration {
     required this.launchDate,
     this.endDate,
     this.destination,
-    required this.achievements,
+    required this.facts,
+    required this.episodes,
     required this.imageUrl,
     required this.crewMembers,
     required this.status,
-    required this.historicalSignificance,
     this.createdAt,
     this.updatedAt,
   });
@@ -48,11 +48,11 @@ class SpaceExploration {
       'launchDate': launchDate.toIso8601String(),
       'endDate': endDate?.toIso8601String(),
       'destination': destination,
-      'achievements': achievements,
+      'facts': facts,
+      'episodes': episodes,
       'imageUrl': imageUrl,
       'crewMembers': crewMembers,
       'status': status.toString(),
-      'historicalSignificance': historicalSignificance,
       'createdAt': createdAt?.toIso8601String(),
       'updatedAt': updatedAt?.toIso8601String(),
     };
@@ -60,6 +60,23 @@ class SpaceExploration {
 
   /// Create from JSON from database
   factory SpaceExploration.fromJson(Map<String, dynamic> json) {
+    // Handle facts - support both legacy achievements format and new facts format
+    Map<String, String> parsedFacts;
+    final factsData = json['facts'] ?? json['achievements']; // Support both field names
+    if (factsData is List) {
+      // Legacy format: List<String> - convert to Map with index as key
+      final factsList = List<String>.from(factsData as List);
+      parsedFacts = {};
+      for (int i = 0; i < factsList.length; i++) {
+        parsedFacts['Fact ${i + 1}'] = factsList[i];
+      }
+    } else if (factsData is Map) {
+      // New format: Map<String, String>
+      parsedFacts = Map<String, String>.from(factsData as Map);
+    } else {
+      parsedFacts = {};
+    }
+
     return SpaceExploration(
       id: json['id'] as String,
       name: json['name'] as String,
@@ -75,14 +92,14 @@ class SpaceExploration {
           ? DateTime.parse(json['endDate'] as String)
           : null,
       destination: json['destination'] as String?,
-      achievements: List<String>.from(json['achievements'] as List),
+      facts: parsedFacts,
+      episodes: List<String>.from(json['episodes'] as List),
       imageUrl: json['imageUrl'] as String,
       crewMembers: List<String>.from(json['crewMembers'] as List),
       status: ExplorationStatus.values.firstWhere(
         (e) => e.toString() == json['status'],
         orElse: () => ExplorationStatus.completed,
       ),
-      historicalSignificance: json['historicalSignificance'] as String,
       createdAt: json['createdAt'] != null
           ? DateTime.parse(json['createdAt'] as String)
           : null,
